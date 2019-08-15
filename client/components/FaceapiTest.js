@@ -5,13 +5,15 @@ class FaceapiTest extends Component {
   constructor() {
     super()
     this.state = {
-      input: null
+      input1: null,
+      input2: null
     }
   }
 
   async componentDidMount() {
-    const input = await faceapi.fetchImage('/image/test-face.png')
-    this.setState({input})
+    const input1 = await faceapi.fetchImage('/image/test-face.png')
+    const input2 = await faceapi.fetchImage('/image/test-face2.png')
+    this.setState({input1, input2})
   }
 
   render() {
@@ -19,7 +21,7 @@ class FaceapiTest extends Component {
     console.log(faceapi.fetchImage)
     console.log(faceapi.computeFaceDescriptor)
     console.log(faceapi.euclideanDistance)
-    console.log(this.state.input)
+    console.log(this.state)
     //run functions here
     //when results ready
     //change state for re render
@@ -27,7 +29,6 @@ class FaceapiTest extends Component {
     return (
       <div>
         <h1>Face-api Test Page</h1>
-        <h2 />
       </div>
     )
   }
