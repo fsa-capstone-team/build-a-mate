@@ -5,5 +5,8 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
-export {Login, Signup} from './auth-form'
+export {LoginForm, SignupForm} from './auth-form'
+export {default as Signup} from './signup'
+export {default as LoginModal} from './login-modal'
+export {default as SignupModal} from './signup-modal'
 export {default as FaceapiTest} from './FaceapiTest'
