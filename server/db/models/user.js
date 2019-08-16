@@ -6,7 +6,11 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -26,6 +30,36 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  name: {
+    type: Sequelize.STRING
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
+  },
+  age: {
+    type: Sequelize.INTEGER
+  },
+  description: {
+    type: Sequelize.TEXT
+  },
+  gender: {
+    type: Sequelize.ENUM('male', 'female')
+  },
+  genderPreference: {
+    type: Sequelize.ENUM('male', 'female')
+  },
+  bwPhoto: {
+    type: Sequelize.STRING
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
+  },
+  photos: {
+    type: Sequelize.ARRAY(Sequelize.TEXT),
+    defaultValue: ['https://image.flaticon.com/icons/svg/149/149071.svg']
   }
 })
 

@@ -38,11 +38,20 @@ export const auth = (email, password, method) => async dispatch => {
     return dispatch(getUser({error: authError}))
   }
 
-  try {
-    dispatch(getUser(res.data))
-    history.push('/home')
-  } catch (dispatchOrHistoryErr) {
-    console.error(dispatchOrHistoryErr)
+  if (method === 'signup') {
+    try {
+      dispatch(getUser(res.data))
+      history.push('/signup')
+    } catch (dispatchOrHistoryErr) {
+      console.error(dispatchOrHistoryErr)
+    }
+  } else {
+    try {
+      dispatch(getUser(res.data))
+      history.push('/home')
+    } catch (dispatchOrHistoryErr) {
+      console.error(dispatchOrHistoryErr)
+    }
   }
 }
 
@@ -50,7 +59,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
-    history.push('/login')
+    history.push('/')
   } catch (err) {
     console.error(err)
   }
