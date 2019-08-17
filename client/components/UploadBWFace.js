@@ -17,8 +17,8 @@ class UploadBWFace extends Component {
 
     //config
     aws.config.update({
-      accessKeyId: 'AKIAIC22S25GWGHO52VQ',
-      secretAccessKey: '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'
+      accessKeyId: 'xxx',
+      secretAccessKey: 'xxx'
     })
 
     //save img to s3
