@@ -2,8 +2,24 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {UserHome, Signup, FaceapiTest, UploadBWFace} from './components'
+import {
+  UserHome,
+  Home,
+  SignupPage,
+  FaceapiTest,
+  UploadBWFace
+} from './components'
 import {me} from './store'
+import {withStyles} from '@material-ui/styles'
+import Box from '@material-ui/core/Box'
+
+const headerHeight = 70
+
+const styles = () => ({
+  content: {
+    marginTop: headerHeight
+  }
+})
 
 /**
  * COMPONENT
@@ -14,24 +30,25 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, classes} = this.props
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        {/* <Route path="/login" component={Login} /> */}
-        <Route path="/signup" component={Signup} />
-        <Route path="/face-api" component={FaceapiTest} />
-        <Route path="/upload-bw-face" component={UploadBWFace} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        {/* <Route component={} /> */}
-      </Switch>
+      <Box className={classes.content}>
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route path="/home" component={Home} />
+          <Route path="/face-api" component={FaceapiTest} />
+          <Route path="/upload-bw-face" component={UploadBWFace} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route path="/signup" component={SignupPage} />
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          {/* <Route component={Home} /> */}
+        </Switch>
+      </Box>
     )
   }
 }
@@ -57,12 +74,15 @@ const mapDispatch = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withStyles(styles)(
+  withRouter(connect(mapState, mapDispatch)(Routes))
+)
 
 /**
  * PROP TYPES
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired
 }
