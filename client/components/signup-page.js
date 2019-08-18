@@ -5,6 +5,9 @@ import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import {SignupForm} from '../components'
+import Box from '@material-ui/core/Box'
+import MakeFace from '../ReactDnD'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,34 +16,39 @@ const useStyles = makeStyles(theme => ({
   backButton: {
     marginRight: theme.spacing(1)
   },
+  buttons: {
+    marginBottom: 50
+  },
   instructions: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    marginRight: 100
+  },
+  stepper: {
+    width: '70%',
+    marginTop: 10,
+    backgroundColor: '#E4E9FE'
   }
 }))
 
 function getSteps() {
-  return [
-    'Select master blaster campaign settings',
-    'Create an ad group',
-    'Create an ad'
-  ]
+  return ['Tell us about yourself', 'Take a picture', 'Build your soulmate']
 }
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return 'Select campaign settings...'
+      return 'Please fill in all required fields.'
     case 1:
-      return 'What is an ad group anyways?'
+      return 'This will be used for matching.'
     case 2:
-      return 'This is the bit I really care about!'
+      return 'Proceed to your matches!'
     default:
       return 'Uknown stepIndex'
   }
 }
 
-const Signup = () => {
+const SignupPage = () => {
   const classes = useStyles()
   const [activeStep, setActiveStep] = React.useState(0)
   const steps = getSteps()
@@ -58,15 +66,38 @@ const Signup = () => {
   }
 
   return (
-    <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
+    <Box display="flex" flexDirection="column" className={classes.root}>
+      <Box display="flex" justifyContent="center" width="100%">
+        <Stepper
+          activeStep={activeStep}
+          alternativeLabel
+          className={classes.stepper}
+        >
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
+      {activeStep === 0 ? (
+        <Box
+          display="flex"
+          width="100%"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-around"
+        >
+          <img src="image/snail_couple.png" width="20%" />
+          <SignupForm />
+          <img src="image/snail_couple.png" width="20%" />
+        </Box>
+      ) : activeStep === 1 ? (
+        <div>Hello World!!</div>
+      ) : activeStep === 2 ? (
+        <MakeFace />
+      ) : null}
+      <Box display="flex" justifyContent="flex-end" className={classes.buttons}>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
@@ -93,9 +124,9 @@ const Signup = () => {
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 
-export default Signup
+export default SignupPage

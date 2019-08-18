@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
-import {LoginModal, SignupModal} from '../components'
+import {AuthModal} from '../components'
 import {makeStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -17,8 +17,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    height: 75,
+    height: 70,
     background: '#E75480'
     // background : '#FDC9D3'
   },
@@ -37,7 +36,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
   return (
     <nav>
       <div className={classes.root}>
-        <AppBar position="sticky" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <img
               src="https://image.flaticon.com/icons/svg/1256/1256664.svg"
@@ -73,8 +72,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
             ) : (
               <Box display="flex" flexDirection="row">
                 {/* The header will show these links before you log in */}
-                <LoginModal />
-                <SignupModal />
+                <AuthModal />
               </Box>
             )}
           </Toolbar>

@@ -69,8 +69,8 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const LoginForm = connect(mapLogin, mapDispatch)(AuthForm)
-export const SignupForm = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(AuthForm)
+export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 
 /**
  * PROP TYPES
