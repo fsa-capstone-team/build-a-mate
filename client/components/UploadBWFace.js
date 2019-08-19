@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import aws from 'aws-sdk'
 
 class UploadBWFace extends Component {
   constructor() {
@@ -10,45 +9,13 @@ class UploadBWFace extends Component {
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault()
-    //const img = e.target.img.files[0].name
+
     const file = e.target.img.files[0]
+    console.log(file)
 
-    //config
-    aws.config.update({
-      accessKeyId: 'xxx',
-      secretAccessKey: 'xxx'
-    })
-
-    //save img to s3
-    var s3 = new aws.S3()
-
-    var params = {
-      Bucket: 'build-a-mate',
-      Key: file.name,
-      Expires: 60,
-      ContentType: file.type
-    }
-
-    // POST works differently in s3, use PUT to add object to bucket
-    s3.getSignedUrl('putObject', params, async function(err, signedUrl) {
-      if (err) {
-        console.log(err)
-        return err
-      } else {
-        console.log('SIGNED URL:', signedUrl)
-
-        await axios
-          .put(signedUrl, file, {headers: {'Content-Type': file.type}})
-          .then(function(result) {
-            console.log('RESULT:', result)
-          })
-          .catch(function(err) {
-            console.log(err)
-          })
-      }
-    })
+    await axios.post('/api/imgur/uploadbwface', file)
 
     this.setState({img: file.name})
   }
