@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
-  UserHome,
+  Profile,
   Home,
   SignupPage,
   FaceapiTest,
@@ -30,7 +30,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, classes} = this.props
+    const {accountCreated, signupCompleted, classes} = this.props
 
     return (
       <Box className={classes.content}>
@@ -39,12 +39,20 @@ class Routes extends Component {
           <Route path="/home" component={Home} />
           <Route path="/face-api" component={FaceapiTest} />
           <Route path="/upload-bw-face" component={UploadBWFace} />
-          {isLoggedIn && (
-            <Switch>
-              {/* Routes placed here are only available after logging in */}
-              <Route path="/signup" component={SignupPage} />
-            </Switch>
-          )}
+          {accountCreated &&
+            signupCompleted && (
+              <Switch>
+                {/* Routes placed here are only available after logging in */}
+                <Route path="/profile" component={Profile} />
+              </Switch>
+            )}
+          {accountCreated &&
+            !signupCompleted && (
+              <Switch>
+                {/* Routes here are available for users who have not created an account or have not completed sign up */}
+                <Route path="/signup" component={SignupPage} />
+              </Switch>
+            )}
           {/* Displays our Login component as a fallback */}
           {/* <Route component={Home} /> */}
         </Switch>
@@ -60,7 +68,9 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    // isLoggedIn: !!state.user.id,
+    accountCreated: !!state.user.id,
+    signupCompleted: !!state.user.firstName
   }
 }
 
@@ -83,6 +93,8 @@ export default withStyles(styles)(
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
+  // isLoggedIn: PropTypes.bool.isRequired,
+  accountCreated: PropTypes.bool.isRequired,
+  signupCompleted: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired
 }
