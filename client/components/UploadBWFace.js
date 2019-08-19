@@ -71,8 +71,7 @@
 
 import React, {Component} from 'react'
 import Webcam from 'react-webcam'
-// import axios from 'axios'
-// import aws from 'aws-sdk'
+import axios from 'axios'
 require('../../secrets')
 
 class UploadBWFace extends Component {
@@ -82,50 +81,43 @@ class UploadBWFace extends Component {
       file: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.capture = this.capture.bind(this)
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
-    //const img = e.target.img.files[0].name
-    const config = {
-      bucketName: process.env.S3_BUCKET,
-      dirName: 'black_n_white' /* optional */,
-      region: 'us-east-1',
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-    }
-
-    S3FileUpload.uploadFile(this.state.file, config)
-      .then(data => console.log(data))
-      .catch(err => console.error(err))
+    await axios.post('api/imgur/uploadbwface', this.state.file)
   }
 
   setRef = webcam => {
     this.webcam = webcam
   }
 
-  capture = () => {
-    var image = new Image()
+  capture() {
+    var img = new Image()
     const imageSrc = this.webcam.getScreenshot()
-    image.src = imageSrc
-    this.setState({file: image})
+    img.src = imageSrc
+    this.setState({file: img})
   }
 
   render() {
+    if (this.state.file) {
+      console.log(this.state.file)
+    }
     console.log(this.state)
     const videoConstraints = {
-      width: 1280,
-      height: 720,
+      width: 150,
+      height: 150,
       facingMode: 'user'
     }
     return (
       <div>
         <Webcam
           audio={false}
-          height={350}
+          height={600}
           ref={this.setRef}
           screenshotFormat="image/png"
-          width={350}
+          width={600}
           videoConstraints={videoConstraints}
         />
         <h1>Upload Face</h1>
