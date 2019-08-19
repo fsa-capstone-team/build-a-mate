@@ -106,8 +106,10 @@ class UploadBWFace extends Component {
   }
 
   capture = () => {
+    var image = new Image()
     const imageSrc = this.webcam.getScreenshot()
-    this.setState({file: imageSrc})
+    image.src = imageSrc
+    this.setState({file: image})
   }
 
   render() {
