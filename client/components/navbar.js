@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Navbar = ({handleClick, isLoggedIn}) => {
+const Navbar = ({handleClick, accountCreated, signupCompleted}) => {
   const classes = useStyles()
 
   return (
@@ -53,17 +53,17 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 color="inherit"
                 variant="h6"
                 className={classes.title}
-                to="/"
+                to="/home"
                 component={NavLink}
               >
                 Build-A-Mate
               </Typography>
             </IconButton>
-            {isLoggedIn ? (
+            {accountCreated ? (
               <div>
                 {/* The header will show these links after you log in */}
-                <Button color="inherit" to="/home" component={NavLink}>
-                  Home
+                <Button color="inherit" to="/profile" component={NavLink}>
+                  Profile
                 </Button>
                 <Button color="inherit" onClick={handleClick}>
                   Logout
@@ -87,7 +87,9 @@ const Navbar = ({handleClick, isLoggedIn}) => {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    // isLoggedIn: !!state.user.id
+    accountCreated: !!state.user.id,
+    signupCompleted: !!state.user.firstName
   }
 }
 
@@ -106,5 +108,7 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  // isLoggedIn: PropTypes.bool.isRequired
+  accountCreated: PropTypes.bool.isRequired,
+  signupCompleted: PropTypes.bool.isRequired
 }
