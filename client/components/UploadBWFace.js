@@ -73,7 +73,6 @@ import React, {Component} from 'react'
 import Webcam from 'react-webcam'
 // import axios from 'axios'
 // import aws from 'aws-sdk'
-import S3FileUpload from 'react-s3'
 require('../../secrets')
 
 class UploadBWFace extends Component {
