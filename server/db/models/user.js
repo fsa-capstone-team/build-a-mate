@@ -31,17 +31,16 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   },
-  name: {
+  firstName: {
     type: Sequelize.STRING
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true
-    // }
+  },
+  lastName: {
+    type: Sequelize.STRING
   },
   age: {
     type: Sequelize.INTEGER
   },
-  description: {
+  summary: {
     type: Sequelize.TEXT
   },
   gender: {
