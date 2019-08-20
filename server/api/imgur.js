@@ -50,34 +50,6 @@ router.get('/bw', async (req, res, next) => {
     )
     console.log('IMGES:', images.data)
     res.send(images.data)
-
-    // METHOD 1 : XML HTTP
-    // const XHR = new XMLHttpRequest()
-    // XHR.open('GET', `https://api.imgur.com/3/album/${id}/images`, true); // true for asynchronous
-    // XHR.setRequestHeader('Authorization', 'Bearer ' + process.env.IMGUR_ACCESS_TOKEN)
-    // XHR.setRequestHeader('Accept', 'application/json')
-    // await XHR.send();
-    // console.log(XHR)
-    // console.log('STATE:', XHR.readyState)
-    // console.log('RES TEXT:', XHR.responseText)
-
-    // if (req.readyState == 4 && req.status === 200) {
-    //   console.log(XHR)
-    //   console.log('STATE:', XHR.readyState)
-    //   console.log('RES TEXT:', XHR.responseText)
-    //   const json = JSON.parse(XHR.responseText)
-    //   console.log(json)
-    //   res.send(json)
-    // } else {
-    //   console.log('Error with Imgur Request.')
-    //   res.sendStatus(500)
-    // }
-
-    // LIB IMGUR
-    // const album = await imgur.getAlbumInfo(id)
-    // console.log(album)
-
-    // res.send(album)
   } catch (err) {
     next(err)
   }

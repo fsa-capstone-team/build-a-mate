@@ -20,7 +20,11 @@ class UploadBWFace extends Component {
   async handleSubmit(e) {
     e.preventDefault()
     console.log('submit')
-    await axios.post('api/imgur/uploadbwface', this.state.file)
+    console.log(this.state.file)
+    const index = this.state.file.src.indexOf(',')
+    const data = this.state.file.src.slice(index + 1)
+    console.log('DATA:', data)
+    await axios.post('api/imgur/uploadbwface', data)
   }
 
   setRef = webcam => {
