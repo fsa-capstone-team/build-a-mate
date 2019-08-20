@@ -5,7 +5,7 @@ import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import {SignupForm} from '../components'
+import {SignupForm, UploadBWFace} from '../components'
 import Box from '@material-ui/core/Box'
 import MakeFace from '../ReactDnD'
 
@@ -112,7 +112,7 @@ class SignupPage extends Component {
             <img src="image/snail_couple.png" width="20%" />
           </Box>
         ) : activeStep === 1 ? (
-          <div>Hello World!!</div>
+          <UploadBWFace />
         ) : activeStep === 2 ? (
           <MakeFace />
         ) : null}
