@@ -7,7 +7,9 @@ import {
   Home,
   SignupPage,
   FaceapiTest,
-  UploadBWFace
+  UploadBWFace,
+  CreateFace,
+  FaceFeatures
 } from './components'
 import {me} from './store'
 import {withStyles} from '@material-ui/styles'
@@ -39,6 +41,7 @@ class Routes extends Component {
           <Route path="/home" component={Home} />
           <Route path="/face-api" component={FaceapiTest} />
           <Route path="/upload-bw-face" component={UploadBWFace} />
+          <Route path="/create-face" component={CreateFace} />
           {accountCreated &&
             signupCompleted && (
               <Switch>

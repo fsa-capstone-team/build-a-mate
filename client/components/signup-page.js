@@ -5,7 +5,7 @@ import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import {SignupForm, UploadBWFace} from '../components'
+import {SignupForm, UploadBWFace, CreateFace} from '../components'
 import Box from '@material-ui/core/Box'
 import MakeFace from '../ReactDnD'
 
@@ -114,7 +114,7 @@ class SignupPage extends Component {
         ) : activeStep === 1 ? (
           <UploadBWFace />
         ) : activeStep === 2 ? (
-          <MakeFace />
+          <CreateFace />
         ) : null}
         <Box
           display="flex"
