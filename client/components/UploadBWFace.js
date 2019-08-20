@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import Webcam from 'react-webcam'
 import axios from 'axios'
-import Img from 'react-image'
-
+import Box from '@material-ui/core/Box'
+import Button from '@material-ui/core/Button'
+import Selfie from './selfie'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
 require('../../secrets')
 
 class UploadBWFace extends Component {
@@ -17,6 +19,7 @@ class UploadBWFace extends Component {
 
   async handleSubmit(e) {
     e.preventDefault()
+    console.log('submit')
     await axios.post('api/imgur/uploadbwface', this.state.file)
   }
 
@@ -37,33 +40,50 @@ class UploadBWFace extends Component {
       console.log(this.state.file.src)
     }
     console.log(this.state)
+
     const videoConstraints = {
       width: 150,
       height: 150,
       facingMode: 'user'
     }
+
     return (
       <div>
-        <Webcam
-          audio={false}
-          height={600}
-          ref={this.setRef}
-          screenshotFormat="image/png"
-          width={600}
-          videoConstraints={videoConstraints}
-        />
         <h1>Upload Face</h1>
-        <form onSubmit={this.handleSubmit}>
-          <button type="submit" onClick={this.capture}>
+
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+          color="text.primary"
+        >
+          <Webcam
+            audio={false}
+            height={300}
+            ref={this.setRef}
+            screenshotFormat="image/png"
+            width={300}
+            videoConstraints={videoConstraints}
+          />
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            type="submit"
+            onClick={this.capture}
+          >
             Capture photo
-          </button>
+            <PhotoCamera />
+          </Button>
           <div>
-            {this.state.file && <Img src={this.state.file.src} />}
-            <input type="submit" value="Upload Image" name="submit" />
+            {this.state.file && (
+              <Selfie img={this.state.file.src} onSubmit={this.handleSubmit} />
+            )}
           </div>
           {/* <input type="file" id="bw-face" name="img" accept="image/png" />
           <input type="submit" value="Upload Image" name="submit" /> */}
-        </form>
+        </Box>
       </div>
     )
   }
