@@ -6,9 +6,7 @@ import Button from '@material-ui/core/Button'
 import Selfie from './selfie'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 require('../../secrets')
-const {
-  LZMA
-} = require('/home/ann/Documents/04_BAM/build-a-mate/node_modules/lzma/src/lzma_worker.js')
+const {LZMA} = require('../../node_modules/lzma/src/lzma_worker.js')
 
 class UploadBWFace extends Component {
   constructor() {

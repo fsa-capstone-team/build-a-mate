@@ -1,14 +1,15 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/styles'
 import FaceFeatures from './face-features'
-import FaceTemplate from './face-template'
+import FaceCanvas from './face-canvas'
 import Grid from '@material-ui/core/Grid'
 
 const styles = () => ({
   features: {
     margin: '2%'
   },
-  template: {
+  canvas: {
     marginTop: '2%',
     marginRight: '2%',
     marginBottom: '2%'
@@ -17,19 +18,28 @@ const styles = () => ({
 
 class CreateFace extends Component {
   render() {
-    const {classes} = this.props
+    const {classes, template, currentFeatures} = this.props
 
     return (
       <Grid container>
         <Grid item xs={5} className={classes.features}>
           <FaceFeatures />
         </Grid>
-        <Grid item xs={6} className={classes.template}>
-          <FaceTemplate />
+        <Grid item xs={6} className={classes.canvas}>
+          <div>
+            <FaceCanvas template={template} currentFeatures={currentFeatures} />
+          </div>
         </Grid>
       </Grid>
     )
   }
 }
 
-export default withStyles(styles)(CreateFace)
+const mapStateToProps = function(state) {
+  return {
+    template: state.currentTemplate,
+    currentFeatures: state.currentFeatures
+  }
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(CreateFace))

@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import {SignupForm, UploadBWFace, CreateFace} from '../components'
 import Box from '@material-ui/core/Box'
-import MakeFace from '../ReactDnD'
 
 const styles = () => ({
   root: {
