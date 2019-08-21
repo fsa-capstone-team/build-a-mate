@@ -60,6 +60,7 @@
     "imgur": "^0.3.1",
     "imgur-node": "^0.2.0",
     "immutability-helper": "^3.0.1",
+    "lz-string": "^1.4.4",
     "lzma": "^2.3.2",
     "morgan": "^1.9.1",
     "multiparty": "^4.2.1",
