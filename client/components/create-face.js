@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/styles'
 import FaceFeatures from './face-features'
 import FaceCanvas from './face-canvas'
+import CustomDragLayer from './custom-drag-layer'
 import Grid from '@material-ui/core/Grid'
 
 const styles = () => ({
@@ -28,6 +29,7 @@ class CreateFace extends Component {
         <Grid item xs={6} className={classes.canvas}>
           <div>
             <FaceCanvas template={template} currentFeatures={currentFeatures} />
+            <CustomDragLayer />
           </div>
         </Grid>
       </Grid>

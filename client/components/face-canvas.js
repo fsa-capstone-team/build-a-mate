@@ -14,22 +14,22 @@ class FaceCanvas extends React.PureComponent {
         eyebrow: {
           top: 0,
           left: 0,
-          image: props.currentFeatures.eyebrow.image
+          image: props.currentFeatures.eyebrow
         },
         eye: {
           top: 0,
           left: 0,
-          image: props.currentFeatures.eye.image
+          image: props.currentFeatures.eye
         },
         nose: {
           top: 0,
           left: 0,
-          image: props.currentFeatures.nose.image
+          image: props.currentFeatures.nose
         },
         mouth: {
           top: 0,
           left: 0,
-          image: props.currentFeatures.mouth.image
+          image: props.currentFeatures.mouth
         }
       }
     }
@@ -44,7 +44,7 @@ class FaceCanvas extends React.PureComponent {
           ...prevState.features,
           eyebrow: {
             ...prevState.features.eyebrow,
-            image: this.props.currentFeatures.eyebrow.image
+            image: this.props.currentFeatures.eyebrow
           }
         }
       }))
@@ -57,7 +57,7 @@ class FaceCanvas extends React.PureComponent {
           ...prevState.features,
           eye: {
             ...prevState.features.eye,
-            image: this.props.currentFeatures.eye.image
+            image: this.props.currentFeatures.eye
           }
         }
       }))
@@ -70,7 +70,7 @@ class FaceCanvas extends React.PureComponent {
           ...prevState.features,
           nose: {
             ...prevState.features.nose,
-            image: this.props.currentFeatures.nose.image
+            image: this.props.currentFeatures.nose
           }
         }
       }))
@@ -83,7 +83,7 @@ class FaceCanvas extends React.PureComponent {
           ...prevState.features,
           mouth: {
             ...prevState.features.mouth,
-            image: this.props.currentFeatures.mouth.image
+            image: this.props.currentFeatures.mouth
           }
         }
       }))
@@ -113,7 +113,9 @@ class FaceCanvas extends React.PureComponent {
       height: 800,
       border: '1px solid black',
       position: 'relative',
-      backgroundImage: `url(${template})`
+      backgroundImage: `url(${template})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '800px 800px'
     }
     return connectDropTarget(
       <div style={styles}>

@@ -5,9 +5,7 @@ const axios = require('axios')
 // const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 require('../../secrets')
 //const client = new Imgur.Client(process.env.IMGUR_CLIENT_ID)
-const {
-  LZMA
-} = require('/home/ann/Documents/04_BAM/build-a-mate/node_modules/lzma/src/lzma_worker.js')
+const {LZMA} = require('../../node_modules/lzma/src/lzma_worker.js')
 const LZString = require('../../node_modules/lz-string/libs/lz-string.js')
 module.exports = router
 
