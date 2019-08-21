@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button'
 import Selfie from './selfie'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 require('../../secrets')
+const {
+  LZMA
+} = require('/home/ann/Documents/04_BAM/build-a-mate/node_modules/lzma/src/lzma_worker.js')
 
 class UploadBWFace extends Component {
   constructor() {
@@ -24,7 +27,11 @@ class UploadBWFace extends Component {
     const index = this.state.file.src.indexOf(',')
     const data = this.state.file.src.slice(index + 1)
     console.log('DATA:', data)
-    await axios.post('api/imgur/uploadbwface', data)
+    console.log('LZMA:', LZMA)
+    LZMA.compress(data, 1, async function on_compress_complete(result) {
+      console.log('Compressed: ' + result)
+      await axios.post('api/imgur/uploadbwface', result)
+    })
   }
 
   setRef = webcam => {
