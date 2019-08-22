@@ -64,10 +64,10 @@ class UploadBWFace extends Component {
         >
           <Webcam
             audio={false}
-            height={20}
+            height={150}
             ref={this.setRef}
             screenshotFormat="image/png"
-            width={20}
+            width={150}
             videoConstraints={videoConstraints}
           />
           <Button
