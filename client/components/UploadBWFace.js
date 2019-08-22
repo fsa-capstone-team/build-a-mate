@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import Selfie from './selfie'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 require('../../secrets')
-
+// import base64Img from 'base64-img'
 
 class UploadBWFace extends Component {
   constructor() {
@@ -24,8 +24,8 @@ class UploadBWFace extends Component {
     console.log(this.state.file)
     const index = this.state.file.src.indexOf(',')
     const data = this.state.file.src.slice(index + 1)
-    console.log('DATA:', data)
-    await axios.post('api/imgur/uploadbwface', data)
+    console.log(data)
+    await axios.post('api/imgur/uploadbwface', {file: data})
   }
 
   setRef = webcam => {
