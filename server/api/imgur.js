@@ -1,28 +1,37 @@
 const router = require('express').Router()
+var imgur = require('imgur')
 const axios = require('axios')
 require('../../secrets')
 module.exports = router
 
-router.post('/uploadbwface', async (req, res, next) => {
+router.post('/uploadbwface', (req, res, next) => {
   try {
-    const id = 'qizwMyP'
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + process.env.IMGUR_ACCESS_TOKEN,
-        Accept: 'application/json'
-      }
-    }
+    imgur.setClientId(process.env.IMGUR_CLIENT_ID)
 
-    console.log('REQ BODY:', req.body)
-    const data = {
-      album: id,
-      title: 'test',
-      name: 'xxx.png',
-      image: req.body
-    }
+    // const id = 'qizwMyP'
+    // const config = {
+    //   headers: {
+    //     Authorization: 'Bearer ' + process.env.IMGUR_ACCESS_TOKEN,
+    //     Accept: 'application/json'
+    //   }
+    // }
 
-    const img = await axios.post(`https://api.imgur.com/3/upload`, data, config)
-    res.send(img.data)
+    // console.log('REQ BODY:', req.body)
+    // const data = {
+    //   album: id,
+    //   title: 'test',
+    //   name: 'xxx.png',
+    //   image: req.body
+    // }
+    const image = req.body.file
+    imgur
+      .uploadBase64(image)
+      .then(function(json) {
+        console.log(json.data.link)
+      })
+      .catch(function(err) {
+        console.error(err.message)
+      })
   } catch (err) {
     next(err)
   }
