@@ -32,6 +32,34 @@ router.post('/signup', async (req, res, next) => {
   }
 })
 
+router.put('/editinfo', async (req, res, next) => {
+  try {
+    const {
+      id,
+      firstName,
+      lastName,
+      age,
+      gender,
+      genderPreference,
+      summary,
+      photos
+    } = req.body
+    const user = await User.findByPk(id)
+    await user.update({
+      firstName,
+      lastName,
+      age,
+      gender,
+      genderPreference,
+      summary,
+      photos
+    })
+    res.send(user)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 router.post('/logout', (req, res) => {
   req.logout()
   req.session.destroy()

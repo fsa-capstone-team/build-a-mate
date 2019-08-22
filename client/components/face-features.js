@@ -43,13 +43,13 @@ class CreateFace extends Component {
         'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png'
       ],
       eyes: [
-        'https://media2.s-nbcnews.com/j/newscms/2018_34/1362722/eyes-open-close-up-stock-today-main-180823_92dfaa7464c6789c6fc6c34d4a6d3d85.fit-760w.jpg',
-        'https://media2.s-nbcnews.com/j/newscms/2018_34/1362722/eyes-open-close-up-stock-today-main-180823_92dfaa7464c6789c6fc6c34d4a6d3d85.fit-760w.jpg',
-        'https://media2.s-nbcnews.com/j/newscms/2018_34/1362722/eyes-open-close-up-stock-today-main-180823_92dfaa7464c6789c6fc6c34d4a6d3d85.fit-760w.jpg',
-        'https://media2.s-nbcnews.com/j/newscms/2018_34/1362722/eyes-open-close-up-stock-today-main-180823_92dfaa7464c6789c6fc6c34d4a6d3d85.fit-760w.jpg',
-        'https://media2.s-nbcnews.com/j/newscms/2018_34/1362722/eyes-open-close-up-stock-today-main-180823_92dfaa7464c6789c6fc6c34d4a6d3d85.fit-760w.jpg',
-        'https://media2.s-nbcnews.com/j/newscms/2018_34/1362722/eyes-open-close-up-stock-today-main-180823_92dfaa7464c6789c6fc6c34d4a6d3d85.fit-760w.jpg',
-        'https://media2.s-nbcnews.com/j/newscms/2018_34/1362722/eyes-open-close-up-stock-today-main-180823_92dfaa7464c6789c6fc6c34d4a6d3d85.fit-760w.jpg'
+        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
+        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
+        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
+        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
+        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
+        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
+        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg'
       ],
       noses: [
         'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',

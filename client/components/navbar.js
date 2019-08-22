@@ -53,7 +53,7 @@ const Navbar = ({handleClick, accountCreated, signupCompleted}) => {
                 color="inherit"
                 variant="h6"
                 className={classes.title}
-                to="/home"
+                to="/"
                 component={NavLink}
               >
                 Build-A-Mate

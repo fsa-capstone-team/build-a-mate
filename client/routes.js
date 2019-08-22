@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Profile,
@@ -38,7 +38,7 @@ class Routes extends Component {
       <Box className={classes.content}>
         <Switch>
           {/* Routes placed here are available to all visitors */}
-          <Route path="/home" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/face-api" component={FaceapiTest} />
           <Route path="/upload-bw-face" component={UploadBWFace} />
           <Route path="/create-face" component={CreateFace} />
@@ -58,6 +58,7 @@ class Routes extends Component {
             )}
           {/* Displays our Login component as a fallback */}
           {/* <Route component={Home} /> */}
+          {/* <Redirect from="/" to="/home" /> */}
         </Switch>
       </Box>
     )
@@ -73,7 +74,7 @@ const mapState = state => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     // isLoggedIn: !!state.user.id,
     accountCreated: !!state.user.id,
-    signupCompleted: !!state.user.firstName
+    signupCompleted: !!state.user.bwPhoto
   }
 }
 
