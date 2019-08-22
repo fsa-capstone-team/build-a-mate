@@ -7,10 +7,10 @@ export function addToCurrentFeatures(feature, image) {
 }
 
 const initialState = {
-  eyebrow: {},
-  eye: {},
-  nose: {},
-  mouth: {}
+  eyebrow: '',
+  eye: '',
+  nose: '',
+  mouth: ''
 }
 
 // REDUCER
@@ -19,7 +19,7 @@ export default function reducer(state = initialState, action) {
     case ADD_FEATURE:
       return {
         ...state,
-        [action.feature]: {top: 0, left: 0, image: action.image}
+        [action.feature]: action.image
       }
     default:
       return state

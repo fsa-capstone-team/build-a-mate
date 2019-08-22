@@ -14,7 +14,6 @@ router.post('/uploadbwface', async (req, res, next) => {
     }
 
     console.log('REQ BODY:', req.body)
-
     const data = {
       album: id,
       title: 'test',

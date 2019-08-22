@@ -33,7 +33,7 @@ class FaceFeature extends React.PureComponent {
     const {image, connectDragSource} = this.props
     return connectDragSource(
       <div style={getStyles(this.props)}>
-        <img src={image} width={100} />
+        <img src={image} width={200} />
       </div>
     )
   }
