@@ -55,6 +55,16 @@ export const auth = (email, password, method) => async dispatch => {
   }
 }
 
+export const editInfo = userObject => async dispatch => {
+  try {
+    const res = await axios.put('/auth/editinfo', userObject)
+    console.log('res:', res)
+    dispatch(getUser(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')

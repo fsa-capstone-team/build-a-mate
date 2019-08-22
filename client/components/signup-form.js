@@ -3,30 +3,35 @@ import {withStyles} from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import TextField from '@material-ui/core/TextField'
+import Select from '@material-ui/core/Select'
+import OutlinedInput from '@material-ui/core/OutlinedInput'
 import MenuItem from '@material-ui/core/MenuItem'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December'
-]
+const months = {
+  January: 1,
+  February: 2,
+  March: 3,
+  April: 4,
+  May: 5,
+  June: 6,
+  July: 7,
+  August: 8,
+  September: 9,
+  October: 10,
+  November: 11,
+  December: 12
+}
 
 const days = [...Array(31).keys()]
 
 const years = [...Array(82).keys()]
 
-const genders = ['Male', 'Female']
+const genders = {
+  Male: 'male',
+  Female: 'female'
+}
 
 const styles = () => ({
   name: {
@@ -36,7 +41,7 @@ const styles = () => ({
     width: '30%'
   },
   gender: {
-    width: '40%'
+    width: '36%'
   },
   aboutMe: {
     width: '88%'
@@ -51,36 +56,20 @@ const styles = () => ({
 })
 
 class SignupForm extends Component {
-  constructor() {
-    super()
-    this.state = {
-      month: 'August',
-      day: 17,
-      year: 2001,
-      myGender: 'Female',
-      mateGender: 'Male',
-      photos: [
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png'
-      ]
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(event) {
-    event.preventDefault()
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
   render() {
-    const {month, day, year, myGender, mateGender, photos} = this.state
-    const {classes} = this.props
+    const {
+      classes,
+      handleChange,
+      firstName,
+      lastName,
+      month,
+      day,
+      year,
+      gender,
+      genderPreference,
+      summary,
+      photos
+    } = this.props
 
     return (
       // <Box width="30%">
@@ -96,11 +85,17 @@ class SignupForm extends Component {
           </Typography>
           <TextField
             placeholder="First"
+            onChange={handleChange}
+            name="firstName"
+            value={firstName}
             className={classes.name}
             variant="outlined"
           />
           <TextField
             placeholder="Last"
+            onChange={handleChange}
+            name="lastName"
+            value={lastName}
             className={classes.name}
             variant="outlined"
           />
@@ -114,63 +109,57 @@ class SignupForm extends Component {
           <Typography variant="h6" component="h3">
             Birthday:
           </Typography>
-          <TextField
-            select
+          <Select
             className={classes.birthday}
-            onChange={this.handleChange}
+            onChange={handleChange}
             name="month"
             value={month}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-            variant="outlined"
+            displayEmpty
+            input={<OutlinedInput />}
           >
-            {months.map(option => (
-              <MenuItem key={option} value={option}>
-                {option}
+            <MenuItem value={null} disabled>
+              -- Select Month --
+            </MenuItem>
+            {Object.keys(months).map(key => (
+              <MenuItem key={months[key]} value={months[key]}>
+                {key}
               </MenuItem>
             ))}
-          </TextField>
-          <TextField
-            select
+          </Select>
+          <Select
             className={classes.birthday}
-            onChange={this.handleChange}
+            onChange={handleChange}
             name="day"
             value={day}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-            variant="outlined"
+            displayEmpty
+            input={<OutlinedInput />}
           >
+            <MenuItem value={null} disabled>
+              -- Select Day --
+            </MenuItem>
             {days.map(option => (
               <MenuItem key={option + 1} value={option + 1}>
                 {option + 1}
               </MenuItem>
             ))}
-          </TextField>
-          <TextField
-            select
+          </Select>
+          <Select
             className={classes.birthday}
-            onChange={this.handleChange}
+            onChange={handleChange}
             name="year"
             value={year}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-            variant="outlined"
+            displayEmpty
+            input={<OutlinedInput />}
           >
+            <MenuItem value={null} disabled>
+              -- Select Year --
+            </MenuItem>
             {years.map(option => (
               <MenuItem key={2001 - option} value={2001 - option}>
                 {2001 - option}
               </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Box>
         <Box
           display="flex"
@@ -181,47 +170,43 @@ class SignupForm extends Component {
           <Typography variant="h6" component="h3">
             I'm a
           </Typography>
-          <TextField
-            select
+          <Select
             className={classes.gender}
-            onChange={this.handleChange}
-            name="myGender"
-            value={myGender}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-            variant="outlined"
+            onChange={handleChange}
+            name="gender"
+            value={gender}
+            displayEmpty
+            input={<OutlinedInput />}
           >
-            {genders.map(option => (
-              <MenuItem key={option} value={option}>
-                {option}
+            <MenuItem value={null} disabled>
+              -- Select Gender --
+            </MenuItem>
+            {Object.keys(genders).map(key => (
+              <MenuItem key={genders[key]} value={genders[key]}>
+                {key}
               </MenuItem>
             ))}
-          </TextField>
+          </Select>
           <Typography variant="h6" component="h3">
             looking for a
           </Typography>
-          <TextField
-            select
+          <Select
             className={classes.gender}
-            onChange={this.handleChange}
-            name="mateGender"
-            value={mateGender}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-            variant="outlined"
+            onChange={handleChange}
+            name="genderPreference"
+            value={genderPreference}
+            displayEmpty
+            input={<OutlinedInput />}
           >
-            {genders.map(option => (
-              <MenuItem key={option} value={option}>
-                {option}
+            <MenuItem value={null} disabled>
+              -- Select Gender --
+            </MenuItem>
+            {Object.keys(genders).map(key => (
+              <MenuItem key={genders[key]} value={genders[key]}>
+                {key}
               </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Box>
         <Box display="flex" alignItems="center" width="100%">
           <Typography variant="h6" component="h3">
@@ -231,6 +216,9 @@ class SignupForm extends Component {
             multiline
             rows="8"
             placeholder="Write something about yourself..."
+            onChange={handleChange}
+            name="summary"
+            value={summary}
             className={classes.aboutMe}
             variant="outlined"
           />
