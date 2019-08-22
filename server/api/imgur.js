@@ -14,7 +14,6 @@ router.post('/uploadbwface', async (req, res, next) => {
     }
 
     console.log('REQ BODY:', req.body)
-   
     const data = {
       album: id,
       title: 'test',
@@ -22,7 +21,7 @@ router.post('/uploadbwface', async (req, res, next) => {
       image: req.body
     }
 
-    const img = await axios.post(`https://api.imgur.com/3/image`, data, config)
+    const img = await axios.post(`https://api.imgur.com/3/upload`, data, config)
     res.send(img.data)
   } catch (err) {
     next(err)

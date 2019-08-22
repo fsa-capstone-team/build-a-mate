@@ -6,8 +6,6 @@ import Button from '@material-ui/core/Button'
 import Selfie from './selfie'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 require('../../secrets')
-const {LZMA} = require('../../node_modules/lzma/src/lzma_worker.js')
-const LZString = require('../../node_modules/lz-string/libs/lz-string.js')
 
 
 class UploadBWFace extends Component {
@@ -26,18 +24,8 @@ class UploadBWFace extends Component {
     console.log(this.state.file)
     const index = this.state.file.src.indexOf(',')
     const data = this.state.file.src.slice(index + 1)
-    // console.log('DATA:', data)
-    // console.log('LZMA:', LZMA)
-    // console.log('LZS:' , LZString)
-    // const compressed = LZString.compressToBase64(data)
-    // console.log('COMPRESSED:', compressed)
-    // const decompressed = LZString.decompressFromBase64(compressed)
-    // console.log('DECOMPRESSED:', decompressed)
-    // await axios.post('api/imgur/uploadbwface', compressed)
-    LZMA.compress(data, 4, async function(result) {
-      console.log('Compressed: ' + result)
-      await axios.post('api/imgur/uploadbwface', result)
-    })
+    console.log('DATA:', data)
+    await axios.post('api/imgur/uploadbwface', data)
   }
 
   setRef = webcam => {
@@ -46,12 +34,8 @@ class UploadBWFace extends Component {
 
   capture() {
     var img = new Image()
-    console.log('1')
-    console.log('1', img)
     const imageSrc = this.webcam.getScreenshot()
     img.src = imageSrc
-    console.log('2HERE', imageSrc)
-    console.log('2', img)
     this.setState({file: img})
   }
 
@@ -81,10 +65,10 @@ class UploadBWFace extends Component {
         >
           <Webcam
             audio={false}
-            height={300}
+            height={150}
             ref={this.setRef}
             screenshotFormat="image/png"
-            width={300}
+            width={150}
             videoConstraints={videoConstraints}
           />
           <Button
