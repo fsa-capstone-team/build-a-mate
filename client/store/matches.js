@@ -34,7 +34,7 @@ export const getMatches = (
       createdFaceImage
     )
 
-    let matches = await Promise.all(
+    let users = await Promise.all(
       data.map(async user => {
         const bwPhotoImage = await faceapi.fetchImage(user.bwPhoto)
         const userBWPhotoDescriptor = await faceapi.computeFaceDescriptor(
@@ -44,16 +44,15 @@ export const getMatches = (
           createdFaceDescriptor,
           userBWPhotoDescriptor
         )
-        return {id: user.id, euclideanDistance}
+        return {...user, euclideanDistance}
       })
     )
 
-    const topMatches = matches
+    const matches = users
       .sort((a, b) => a.euclideanDistance - b.euclideanDistance)
-      .slice(0, 5)
+      .slice(0, 4)
 
-    console.log('euclidean distances:', topMatches)
-    dispatch(gotMatches(topMatches))
+    dispatch(gotMatches(matches))
   } catch (err) {
     console.error(err)
   }

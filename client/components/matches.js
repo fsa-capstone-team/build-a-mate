@@ -1,25 +1,16 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Profile} from '../components'
-import * as faceapi from 'face-api.js'
 import {getMatches} from '../store'
+import {Profile} from '../components'
+import Box from '@material-ui/core/Box'
 
 class Matches extends Component {
   constructor() {
     super()
-    this.state = {
-      myImage: null,
-      myFaceDesc: null,
-      distance: null
-    }
+    this.state = {}
   }
 
   componentDidMount() {
-    // await faceapi.loadFaceRecognitionModel('/models')
-    // const image = await faceapi.fetchImage(this.props.bwPhoto)
-    // this.setState({
-    //   myImage: image
-    // })
     this.props.getMatches(
       this.props.id,
       this.props.gender,
@@ -28,25 +19,22 @@ class Matches extends Component {
     )
   }
 
-  async computeFaceDescriptor(image) {
-    const faceDesc = await faceapi.computeFaceDescriptor(image)
-    this.setState({
-      myFaceDesc: faceDesc
-    })
-  }
-
-  async computeEuclideanDistance(faceDesc1, faceDesc2) {
-    const eucDist = await faceapi.round(
-      faceapi.euclideanDistance(faceDesc1, faceDesc2)
-    )
-    this.setState({
-      distance: eucDist
-    })
-  }
-
   render() {
-    console.log(this.state)
-    return <div>Euclidean Distance: {this.state.distance}</div>
+    const {matches} = this.props
+    console.log(matches)
+
+    return (
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        {matches.map(match => {
+          return <Profile key={match.id} {...match} />
+        })}
+      </Box>
+    )
   }
 }
 
@@ -55,7 +43,8 @@ const mapStateToProps = function(state) {
     id: state.user.id,
     gender: state.user.gender,
     genderPreference: state.user.genderPreference,
-    createdFace: state.user.createdFace
+    createdFace: state.user.createdFace,
+    matches: state.matches
   }
 }
 
