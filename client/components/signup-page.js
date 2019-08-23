@@ -162,7 +162,7 @@ class SignupPage extends Component {
             <img src="image/snail_couple.png" width="20%" />
           </Box>
         ) : activeStep === 1 ? (
-          <UploadBWFace />
+          <UploadBWFace id={this.props.id} />
         ) : activeStep === 2 ? (
           <CreateFace />
         ) : null}
