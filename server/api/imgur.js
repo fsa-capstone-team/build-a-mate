@@ -8,20 +8,25 @@ module.exports = router
 router.post('/uploadbwface/:id', async (req, res, next) => {
   try {
     imgur.setClientId(process.env.IMGUR_CLIENT_ID)
+    imgur.setCredentials(
+      process.env.IMGUR_EMAIL,
+      process.env.IMGUR_PASSWORD,
+      process.env.IMGUR_CLIENT_ID
+    )
     const image = req.body.file
-
+    const id = 'qizwMyP'
     // CONVERT TO GRAYSCALE //
 
     let bwPhoto = ''
 
     // UPLOAD TO IMGUR -> GET PHOTO ID
     await imgur
-      .uploadBase64(image)
+      .uploadBase64(image, id)
       .then(function(json) {
         bwPhoto = json.data.link
           .split('https://i.imgur.com/')[1]
           .split('.png')[0]
-        console.log(bwPhoto)
+        console.log('THIS IS MY BW PHOTO', bwPhoto)
       })
       .catch(function(err) {
         console.error(err.message)
