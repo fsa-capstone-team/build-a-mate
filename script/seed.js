@@ -9,24 +9,109 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({
-      email: 'cody@email.com',
+      email: 'jayz@email.com',
       password: '123',
-      firstName: 'Cody',
-      lastName: 'Brown',
-      age: 21,
-      summary: 'Hi, my name is Cody. I am looking for my soulmate.',
+      firstName: 'Shawn',
+      lastName: 'Carter',
+      age: 49,
+      summary:
+        'Hi, my name is Shawn, but I go by Jay-Z. I am looking for Beyonce.',
       gender: 'male',
-      genderPreference: 'female'
+      genderPreference: 'female',
+      photos: [],
+      bwPhoto: 'https://i.imgur.com/ycVVg0B.jpg',
+      createdFace: 'https://i.imgur.com/QW1vt3O.png'
+    }),
+    // User.create({
+    //   email: 'beyonce@email.com',
+    //   password: '123',
+    //   firstName: 'Beyonce',
+    //   lastName: 'Knowles-Carter',
+    //   age: 37,
+    //   summary: 'Hi, my name is Beyonce. I am looking for Jay Z.',
+    //   gender: 'female',
+    //   genderPreference: 'male',
+    //   photos: [],
+    //   bwPhoto: 'https://i.imgur.com/QW1vt3O.png',
+    //   createdFace: 'https://i.imgur.com/ycVVg0B.jpg'
+    // }),
+    User.create({
+      email: 'jennifer1@email.com',
+      password: '123',
+      firstName: 'Jennifer',
+      lastName: 'Howley',
+      age: 28,
+      summary: 'Hi, my name is Jennifer. I am looking for Jay Z.',
+      gender: 'female',
+      genderPreference: 'male',
+      photos: [],
+      bwPhoto: 'https://i.imgur.com/svaXhHv.jpg',
+      createdFace: 'https://i.imgur.com/ycVVg0B.jpg'
     }),
     User.create({
-      email: 'courtney@email.com',
+      email: 'beyonce@email.com',
       password: '123',
-      firstName: 'Courtney',
-      lastName: 'White',
-      age: 23,
-      summary: 'Hi, my name is Courtney. I am looking for my future hubby.',
+      firstName: 'Beyonce',
+      lastName: 'Knowles-Carter',
+      age: 37,
+      summary: 'Hi, my name is Beyonce. I am looking for Jay Z.',
       gender: 'female',
-      genderPreference: 'male'
+      genderPreference: 'male',
+      photos: [],
+      bwPhoto: 'https://i.imgur.com/QW1vt3O.png',
+      createdFace: 'https://i.imgur.com/ycVVg0B.jpg'
+    }),
+    User.create({
+      email: 'jennifer2@email.com',
+      password: '123',
+      firstName: 'Jennifer',
+      lastName: 'Howley',
+      age: 28,
+      summary: 'Hi, my name is Jennifer. I am looking for Jay Z.',
+      gender: 'female',
+      genderPreference: 'male',
+      photos: [],
+      bwPhoto: 'https://i.imgur.com/svaXhHv.jpg',
+      createdFace: 'https://i.imgur.com/ycVVg0B.jpg'
+    }),
+    User.create({
+      email: 'jennifer3@email.com',
+      password: '123',
+      firstName: 'Jennifer',
+      lastName: 'Howley',
+      age: 28,
+      summary: 'Hi, my name is Jennifer. I am looking for Jay Z.',
+      gender: 'female',
+      genderPreference: 'male',
+      photos: [],
+      bwPhoto: 'https://i.imgur.com/svaXhHv.jpg',
+      createdFace: 'https://i.imgur.com/ycVVg0B.jpg'
+    }),
+    User.create({
+      email: 'jennifer4@email.com',
+      password: '123',
+      firstName: 'Jennifer',
+      lastName: 'Howley',
+      age: 28,
+      summary: 'Hi, my name is Jennifer. I am looking for Jay Z.',
+      gender: 'female',
+      genderPreference: 'male',
+      photos: [],
+      bwPhoto: 'https://i.imgur.com/svaXhHv.jpg',
+      createdFace: 'https://i.imgur.com/ycVVg0B.jpg'
+    }),
+    User.create({
+      email: 'jennifer5@email.com',
+      password: '123',
+      firstName: 'Jennifer',
+      lastName: 'Howley',
+      age: 28,
+      summary: 'Hi, my name is Jennifer. I am looking for Jay Z.',
+      gender: 'female',
+      genderPreference: 'male',
+      photos: [],
+      bwPhoto: 'https://i.imgur.com/svaXhHv.jpg',
+      createdFace: 'https://i.imgur.com/ycVVg0B.jpg'
     })
   ])
 

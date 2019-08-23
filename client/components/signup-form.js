@@ -235,7 +235,12 @@ class SignupForm extends Component {
           >
             {photos.map(photo => (
               <GridListTile key={photo} cols={1} rows={1}>
-                <img src={photo} />
+                <img
+                  src={photo}
+                  onClick={() => {
+                    alert('Upload image functionality to be added!')
+                  }}
+                />
               </GridListTile>
             ))}
           </GridList>

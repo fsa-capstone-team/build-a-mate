@@ -15,3 +15,16 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/matches', async (req, res, next) => {
+  try {
+    const {gender, genderPreference} = req.body
+    const users = await User.findAll({
+      where: {gender: genderPreference, genderPreference: gender},
+      attributes: ['id', 'firstName', 'age', 'summary', 'photos', 'bwPhoto']
+    })
+    res.send(users)
+  } catch (err) {
+    next(err)
+  }
+})

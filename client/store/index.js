@@ -5,8 +5,14 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import currentTemplate from './currentTemplate'
 import currentFeatures from './currentFeatures'
+import matches from './matches'
 
-const reducer = combineReducers({user, currentTemplate, currentFeatures})
+const reducer = combineReducers({
+  user,
+  currentTemplate,
+  currentFeatures,
+  matches
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -16,3 +22,4 @@ export default store
 export * from './user'
 export * from './currentTemplate'
 export * from './currentFeatures'
+export * from './matches'

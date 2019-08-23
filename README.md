@@ -188,7 +188,7 @@ above has failed.
 That's it! From now on, whenever `master` is updated on GitHub, Travis
 will automatically push the app to Heroku for you.
 
-### Cody's own deploy script
+### Jay-Z's own deploy script
 
 Your local copy of the application can be pushed up to Heroku at will,
 using Boilermaker's handy deployment script:
