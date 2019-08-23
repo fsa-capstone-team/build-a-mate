@@ -75,6 +75,16 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const uploadBWFace = (userId, dataObj) => async dispatch => {
+  try {
+    const res = await axios.post(`api/imgur/uploadbwface/${userId}`, dataObj)
+    console.log('USER:', res.data)
+    dispatch(getUser(res.data))
+  } catch (err) {
+    console.err(err)
+  }
+}
+
 /**
  * REDUCER
  */
