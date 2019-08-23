@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Webcam from 'react-webcam'
 import axios from 'axios'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Selfie from './selfie'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
+import {uploadBWFace} from '../store'
 require('../../secrets')
 
 class UploadBWFace extends Component {
@@ -22,8 +24,8 @@ class UploadBWFace extends Component {
     const data = this.state.file.src.split(',')[1]
     console.log(data)
     console.log(this.props.id)
-    await axios.post(`api/imgur/uploadbwface/${this.props.id}`, {file: data})
-    //await axios.post(`api/imgur/uploadbwface/1`, {file: data})
+    this.props.uploadBWFace(this.props.id, {file: data})
+    //await axios.post(`api/imgur/uploadbwface/${this.props.id}`, {file: data})
   }
 
   setRef = webcam => {
@@ -86,4 +88,12 @@ class UploadBWFace extends Component {
   }
 }
 
-export default UploadBWFace
+const mapStateToProps = state => ({
+  id: state.user.id
+})
+
+const mapDispatchToProps = dispatch => ({
+  uploadBWFace: (id, obj) => dispatch(uploadBWFace(id, obj))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UploadBWFace)
