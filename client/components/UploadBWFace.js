@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button'
 import Selfie from './selfie'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 require('../../secrets')
-// import base64Img from 'base64-img'
 
 class UploadBWFace extends Component {
   constructor() {
@@ -20,12 +19,11 @@ class UploadBWFace extends Component {
 
   async handleSubmit(e) {
     e.preventDefault()
-    console.log('submit')
-    console.log(this.state.file)
-    const index = this.state.file.src.indexOf(',')
-    const data = this.state.file.src.slice(index + 1)
+    const data = this.state.file.src.split(',')[1]
     console.log(data)
-    await axios.post('api/imgur/uploadbwface', {file: data})
+    console.log(this.props.id)
+    await axios.post(`api/imgur/uploadbwface/${this.props.id}`, {file: data})
+    //await axios.post(`api/imgur/uploadbwface/1`, {file: data})
   }
 
   setRef = webcam => {
@@ -40,10 +38,6 @@ class UploadBWFace extends Component {
   }
 
   render() {
-    if (this.state.file) {
-      console.log(this.state.file)
-      console.log(this.state.file.src)
-    }
     console.log(this.state)
 
     const videoConstraints = {
@@ -86,8 +80,6 @@ class UploadBWFace extends Component {
               <Selfie img={this.state.file.src} onSubmit={this.handleSubmit} />
             )}
           </div>
-          {/* <input type="file" id="bw-face" name="img" accept="image/png" />
-          <input type="submit" value="Upload Image" name="submit" /> */}
         </Box>
       </div>
     )
