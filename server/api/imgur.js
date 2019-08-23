@@ -15,7 +15,7 @@ router.post('/uploadbwface/:id', async (req, res, next) => {
     let bwPhoto = ''
 
     // UPLOAD TO IMGUR -> GET PHOTO ID
-    imgur
+    await imgur
       .uploadBase64(image)
       .then(function(json) {
         bwPhoto = json.data.link
@@ -29,7 +29,10 @@ router.post('/uploadbwface/:id', async (req, res, next) => {
 
     // ADD PHOTO ID TO USER INSTANCE
     const user = await User.findByPk(req.params.id)
+    console.log(user)
+    console.log('HERE', bwPhoto)
     await user.update({bwPhoto})
+    console.log(user)
     res.sendStatus(200)
   } catch (err) {
     next(err)
