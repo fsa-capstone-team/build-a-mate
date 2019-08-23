@@ -57,6 +57,7 @@
     "file-type": "^12.2.0",
     "fs": "0.0.1-security",
     "history": "^4.9.0",
+    "html2canvas": "^1.0.0-rc.3",
     "image-filter-grayscale": "^1.0.1",
     "imgur": "^0.3.1",
     "imgur-node": "^0.2.0",
