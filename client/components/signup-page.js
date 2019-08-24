@@ -7,7 +7,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import {SignupForm, UploadBWFace, CreateFace} from '../components'
+import {SignupForm, UploadBWFace, CreateFace, Matches} from '../components'
 import {editInfo} from '../store'
 
 const styles = () => ({
@@ -59,7 +59,9 @@ class SignupPage extends Component {
         'image/add-photo.png',
         'image/add-photo.png'
       ],
-      bwPhoto: null
+      bwPhoto: null,
+      createdFace:
+        'https://pmcvariety.files.wordpress.com/2017/09/jennifer_lopez.png'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleNext = this.handleNext.bind(this)
@@ -113,7 +115,7 @@ class SignupPage extends Component {
 
   handleReset() {
     this.setState({
-      activeStep: 0
+      activeStep: 2
     })
   }
 
@@ -165,7 +167,9 @@ class SignupPage extends Component {
           <UploadBWFace id={this.props.id} />
         ) : activeStep === 2 ? (
           <CreateFace />
-        ) : null}
+        ) : (
+          <Matches />
+        )}
         <Box
           display="flex"
           justifyContent="flex-end"
@@ -176,7 +180,7 @@ class SignupPage extends Component {
               <Typography className={classes.instructions}>
                 All steps completed
               </Typography>
-              <Button onClick={this.handleReset}>Reset</Button>
+              <Button onClick={this.handleReset}>Build a new face</Button>
             </div>
           ) : (
             <div>
