@@ -30,7 +30,7 @@ class CreateFace extends Component {
       croppedCanvas.width = 800
       croppedCanvas.height = 800
 
-      croppedCanvasContext.drawImage(canvas, 150, 150, 800, 800, 0, 0, 800, 800)
+      croppedCanvasContext.drawImage(canvas, 0, 0, 800, 800, 0, 0, 800, 800)
       console.log('CROPPED:', croppedCanvas.toDataURL())
     })
   }
