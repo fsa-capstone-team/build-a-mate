@@ -49,16 +49,15 @@ const User = db.define('user', {
   genderPreference: {
     type: Sequelize.ENUM('male', 'female')
   },
-  bwPhoto: {
-    type: Sequelize.STRING
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true
-    // }
-  },
   photos: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
     defaultValue: ['https://image.flaticon.com/icons/svg/149/149071.svg']
+  },
+  bwPhoto: {
+    type: Sequelize.STRING
+  },
+  createdFace: {
+    type: Sequelize.STRING
   }
 })
 

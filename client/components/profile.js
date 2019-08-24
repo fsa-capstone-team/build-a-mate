@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import SwipeableViews from 'react-swipeable-views'
 import {autoPlay} from 'react-swipeable-views-utils'
-import {Box} from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 
@@ -43,7 +42,7 @@ const tutorialSteps = [
 
 const styles = () => ({
   root: {
-    maxWidth: 500,
+    maxWidth: 400,
     flexGrow: 1
   },
   img: {
@@ -57,7 +56,7 @@ const styles = () => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    height: 500,
+    height: 400,
     justifyContent: 'flex-start'
   },
   content: {
@@ -94,8 +93,9 @@ class Profile extends Component {
 
   render() {
     const {activeStep} = this.state
-    const {classes, user} = this.props
     const maxSteps = tutorialSteps.length
+
+    const {classes, firstName, age, summary, photos} = this.props
 
     return (
       <div className={classes.root}>
@@ -104,14 +104,10 @@ class Profile extends Component {
           onChangeIndex={this.handleStepChange}
           enableMouseEvents
         >
-          {tutorialSteps.map((step, index) => (
-            <div key={step.label}>
+          {photos.map((step, index) => (
+            <div key={index}>
               {Math.abs(activeStep - index) <= 2 ? (
-                <img
-                  className={classes.img}
-                  src={step.imgPath}
-                  alt={step.label}
-                />
+                <img className={classes.img} src={step} />
               ) : null}
             </div>
           ))}
@@ -143,18 +139,16 @@ class Profile extends Component {
         <Paper square elevation={0} className={classes.summary}>
           <Grid container alignItems="center">
             <Grid item xs className={classes.content}>
-              <Typography variant="h4">
-                {`${user.firstName}, ${user.age}`}
-              </Typography>
+              <Typography variant="h4">{`${firstName}, ${age}`}</Typography>
             </Grid>
-            <Grid item className={classes.content}>
+            {/* <Grid item className={classes.content}>
               <Typography variant="h4">90% Match</Typography>
-            </Grid>
+            </Grid> */}
           </Grid>
           <Divider variant="middle" />
           <div className={classes.content}>
             <Typography variant="h5">About</Typography>
-            <Typography variant="h6">{user.summary}</Typography>
+            <Typography variant="h6">{summary}</Typography>
           </div>
         </Paper>
       </div>

@@ -9,7 +9,8 @@ import {
   FaceapiTest,
   UploadBWFace,
   CreateFace,
-  FaceFeatures
+  FaceFeatures,
+  Matches
 } from './components'
 import {me} from './store'
 import {withStyles} from '@material-ui/styles'
@@ -46,6 +47,7 @@ class Routes extends Component {
             signupCompleted && (
               <Switch>
                 {/* Routes placed here are only available after logging in */}
+                <Route path="/matches" component={Matches} />
                 <Route path="/profile" component={Profile} />
               </Switch>
             )}
