@@ -50,7 +50,7 @@ export const getMatches = (
 
     const matches = users
       .sort((a, b) => a.euclideanDistance - b.euclideanDistance)
-      .slice(0, 4)
+      .slice(0, 5)
 
     dispatch(gotMatches(matches))
   } catch (err) {
