@@ -118,7 +118,7 @@ class FaceCanvas extends React.PureComponent {
       backgroundSize: '800px 800px'
     }
     return connectDropTarget(
-      <div id="faceCanvas" style={styles}>
+      <div style={styles}>
         {Object.keys(features).map(key => this.renderBox(features[key], key))}
       </div>
     )

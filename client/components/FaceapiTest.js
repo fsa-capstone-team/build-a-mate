@@ -15,8 +15,12 @@ class FaceapiTest extends Component {
     await faceapi.loadFaceRecognitionModel('/models')
     console.log('1')
     const desc1 = await faceapi.computeFaceDescriptor(this.state.input1)
+    console.log('desc1:', desc1.slice(0, 100))
+    console.log('desc1:', desc1.slice(100))
     console.log('2')
     const desc2 = await faceapi.computeFaceDescriptor(this.state.input2)
+    console.log('desc2:', desc2.slice(0, 100))
+    console.log('desc2:', desc2.slice(100))
     console.log('3')
     const distance = faceapi.round(faceapi.euclideanDistance(desc1, desc2))
     this.setState({distance})
@@ -24,12 +28,9 @@ class FaceapiTest extends Component {
 
   async componentDidMount() {
     // await faceapi.loadFaceRecognitionModel('/models')
-    const input1 = await faceapi.fetchImage(
-      'https://build-a-mate.s3.amazonaws.com/test-face.png'
-    )
-    const input2 = await faceapi.fetchImage(
-      'https://build-a-mate.s3.amazonaws.com/test-face2.png'
-    )
+    const input1 = await faceapi.fetchImage('https://i.imgur.com/svaXhHv.jpg')
+    const input2 = await faceapi.fetchImage('https://i.imgur.com/ycVVg0B.jpg')
+    console.log('INPUT:', input1)
     // const desc1 = await faceapi.computeFaceDescriptor(input1)
     // const desc2 = await faceapi.computeFaceDescriptor(input2)
     // this.setState({input1, input2, desc1, desc2})

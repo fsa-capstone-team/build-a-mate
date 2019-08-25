@@ -22,18 +22,28 @@ export const getMatches = (
     //   computeFaceDescriptor: faceapi.computeFaceDescriptor,
     //   euclideanDistance: faceapi.euclideanDistance
     // })
+    console.time('total')
+    console.time('axios')
     const {data} = await axios.post('/api/users/matches', {
       id,
       gender,
       genderPreference
     })
-
+    console.timeEnd('axios')
+    console.time('load Model')
     await faceapi.loadFaceRecognitionModel('/models')
+    console.timeEnd('load Model')
+    console.time('fetchImage')
+    console.log(createdFace)
     const createdFaceImage = await faceapi.fetchImage(createdFace)
+    //console.log(createdFaceImage)
+    console.timeEnd('fetchImage')
+    console.time('compute')
     const createdFaceDescriptor = await faceapi.computeFaceDescriptor(
       createdFaceImage
     )
-
+    console.timeEnd('compute')
+    console.time('map')
     let users = await Promise.all(
       data.map(async user => {
         const bwPhotoImage = await faceapi.fetchImage(user.bwPhoto)
@@ -47,11 +57,13 @@ export const getMatches = (
         return {...user, euclideanDistance}
       })
     )
-
+    console.timeEnd('map')
+    console.time('sort')
     const matches = users
       .sort((a, b) => a.euclideanDistance - b.euclideanDistance)
       .slice(0, 5)
-
+    console.timeEnd('sort')
+    console.timeEnd('total')
     dispatch(gotMatches(matches))
   } catch (err) {
     console.error(err)

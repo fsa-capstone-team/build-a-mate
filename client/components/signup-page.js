@@ -166,7 +166,7 @@ class SignupPage extends Component {
         ) : activeStep === 1 ? (
           <UploadBWFace id={this.props.id} />
         ) : activeStep === 2 ? (
-          <CreateFace />
+          <CreateFace id={this.props.id} />
         ) : (
           <Matches />
         )}

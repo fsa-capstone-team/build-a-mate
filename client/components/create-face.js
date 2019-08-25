@@ -7,6 +7,7 @@ import CustomDragLayer from './custom-drag-layer'
 import Grid from '@material-ui/core/Grid'
 import {Button} from '@material-ui/core'
 import html2canvas from 'html2canvas'
+import {saveCreatedFace} from '../store'
 
 const styles = () => ({
   features: {
@@ -21,8 +22,8 @@ const styles = () => ({
 
 class CreateFace extends Component {
   handleScreenShot = () => {
-    const body = document.getElementById('faceCanvas')
-
+    const body = document.querySelector('body')
+    console.log(body)
     html2canvas(body).then(canvas => {
       let croppedCanvas = document.createElement('canvas')
       let croppedCanvasContext = croppedCanvas.getContext('2d')
@@ -31,7 +32,10 @@ class CreateFace extends Component {
       croppedCanvas.height = 800
 
       croppedCanvasContext.drawImage(canvas, 0, 0, 800, 800, 0, 0, 800, 800)
-      console.log('CROPPED:', croppedCanvas.toDataURL())
+      const data = croppedCanvas //.toDataURL().split(',')[1]
+      console.log('CROPPED:', data)
+      console.log(this.props.id)
+      this.props.saveCreatedFace(this.props.id, data)
     })
   }
 
@@ -44,7 +48,7 @@ class CreateFace extends Component {
           <FaceFeatures />
         </Grid>
         <Grid item xs={6} className={classes.canvas}>
-          <div>
+          <div id="faceCanvas">
             <FaceCanvas template={template} currentFeatures={currentFeatures} />
             <CustomDragLayer />
           </div>
@@ -57,11 +61,16 @@ class CreateFace extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
-  return {
-    template: state.currentTemplate,
-    currentFeatures: state.currentFeatures
-  }
-}
+const mapStateToProps = state => ({
+  id: state.user.id,
+  template: state.currentTemplate,
+  currentFeatures: state.currentFeatures
+})
 
-export default withStyles(styles)(connect(mapStateToProps)(CreateFace))
+const mapDispatchToProps = dispatch => ({
+  saveCreatedFace: (id, obj) => dispatch(saveCreatedFace(id, obj))
+})
+
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(CreateFace)
+)
