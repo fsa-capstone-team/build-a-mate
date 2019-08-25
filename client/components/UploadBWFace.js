@@ -25,7 +25,6 @@ class UploadBWFace extends Component {
     console.log(data)
     console.log(this.props.id)
     this.props.uploadBWFace(this.props.id, {file: data})
-    //await axios.post(`api/imgur/uploadbwface/${this.props.id}`, {file: data})
   }
 
   setRef = webcam => {

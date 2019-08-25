@@ -80,6 +80,7 @@ export const uploadBWFace = (userId, dataObj) => async dispatch => {
     const res = await axios.post(`api/imgur/uploadbwface/${userId}`, dataObj)
     console.log('USER:', res.data)
     dispatch(getUser(res.data))
+    history.push('/create-face')
   } catch (err) {
     console.err(err)
   }
