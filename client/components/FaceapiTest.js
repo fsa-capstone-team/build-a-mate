@@ -22,7 +22,14 @@ class FaceapiTest extends Component {
     console.log('desc2:', desc2.slice(0, 100))
     console.log('desc2:', desc2.slice(100))
     console.log('3')
-    const distance = faceapi.round(faceapi.euclideanDistance(desc1, desc2))
+    // const distance = faceapi.round(faceapi.euclideanDistance(desc1, desc2))
+    const stringifiedDesc1 = JSON.stringify(Array.from(desc1))
+    const stringifiedDesc2 = JSON.stringify(Array.from(desc2))
+    const parsedDesc1 = new Float32Array(JSON.parse(stringifiedDesc1))
+    const parsedDesc2 = new Float32Array(JSON.parse(stringifiedDesc2))
+    const distance = faceapi.round(
+      faceapi.euclideanDistance(parsedDesc1, parsedDesc2)
+    )
     this.setState({distance})
   }
 

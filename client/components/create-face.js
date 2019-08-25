@@ -6,8 +6,9 @@ import FaceCanvas from './face-canvas'
 import CustomDragLayer from './custom-drag-layer'
 import Grid from '@material-ui/core/Grid'
 import {Button} from '@material-ui/core'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import html2canvas from 'html2canvas'
-import {saveCreatedFace} from '../store'
+import {addFaceDesc} from '../store'
 
 const styles = () => ({
   features: {
@@ -32,10 +33,11 @@ class CreateFace extends Component {
       croppedCanvas.height = 800
 
       croppedCanvasContext.drawImage(canvas, 0, 0, 800, 800, 0, 0, 800, 800)
-      const data = croppedCanvas //.toDataURL().split(',')[1]
-      console.log('CROPPED:', data)
+      const img = croppedCanvas //.toDataURL().split(',')[1]
+      console.log('CROPPED:', img)
       console.log(this.props.id)
-      this.props.saveCreatedFace(this.props.id, data)
+      this.props.setParentState('createdFaceImg', img)
+      // this.props.addFaceDesc(this.props.id, img, 'createdFaceDesc')
     })
   }
 
@@ -53,7 +55,16 @@ class CreateFace extends Component {
             <CustomDragLayer />
           </div>
           <div>
-            <Button onClick={this.handleScreenShot}>Submit</Button>
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              type="submit"
+              onClick={this.handleScreenShot}
+            >
+              Capture Face
+              <PhotoCamera />
+            </Button>
           </div>
         </Grid>
       </Grid>
@@ -68,7 +79,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveCreatedFace: (id, obj) => dispatch(saveCreatedFace(id, obj))
+  addFaceDesc: (userId, img, type) => dispatch(addFaceDesc(userId, img, type))
 })
 
 export default withStyles(styles)(

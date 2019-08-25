@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import {SignupForm, UploadBWFace, CreateFace, Matches} from '../components'
-import {editInfo} from '../store'
+import {editInfo, addFaceDesc} from '../store'
 
 const styles = () => ({
   root: {
@@ -59,11 +59,11 @@ class SignupPage extends Component {
         'image/add-photo.png',
         'image/add-photo.png'
       ],
-      bwPhoto: null,
-      createdFace:
-        'https://pmcvariety.files.wordpress.com/2017/09/jennifer_lopez.png'
+      bwFaceImg: null,
+      createdFaceImg: null
     }
     this.handleChange = this.handleChange.bind(this)
+    this.setParentState = this.setParentState.bind(this)
     this.handleNext = this.handleNext.bind(this)
     this.handleBack = this.handleBack.bind(this)
     this.handleReset = this.handleReset.bind(this)
@@ -74,6 +74,12 @@ class SignupPage extends Component {
     event.preventDefault()
     this.setState({
       [event.target.name]: event.target.value
+    })
+  }
+
+  setParentState(type, img) {
+    this.setState({
+      [type]: img
     })
   }
 
@@ -100,6 +106,14 @@ class SignupPage extends Component {
         summary: this.state.summary,
         photos: this.state.photos
       })
+    } else if (this.state.activeStep === 1) {
+      this.props.addFaceDesc(this.props.id, this.state.bwFaceImg, 'bwFaceDesc')
+    } else if (this.state.activeStep === 2) {
+      this.props.addFaceDesc(
+        this.props.id,
+        this.state.createdFaceImg,
+        'createdFaceDesc'
+      )
     }
 
     this.setState(prevState => ({
@@ -136,6 +150,8 @@ class SignupPage extends Component {
     const {activeStep} = this.state
     const {classes} = this.props
 
+    console.log(this.state)
+
     return (
       <Box display="flex" flexDirection="column" className={classes.root}>
         <Box display="flex" justifyContent="center" width="100%">
@@ -164,9 +180,17 @@ class SignupPage extends Component {
             <img src="image/snail_couple.png" width="20%" />
           </Box>
         ) : activeStep === 1 ? (
-          <UploadBWFace id={this.props.id} />
+          <UploadBWFace
+            id={this.props.id}
+            setParentState={this.setParentState}
+            {...this.state}
+          />
         ) : activeStep === 2 ? (
-          <CreateFace id={this.props.id} />
+          <CreateFace
+            id={this.props.id}
+            setParentState={this.setParentState}
+            {...this.state}
+          />
         ) : (
           <Matches />
         )}
@@ -221,6 +245,9 @@ const mapDispatchToProps = function(dispatch) {
   return {
     updateInfo(userObject) {
       dispatch(editInfo(userObject))
+    },
+    addFaceDesc(userId, img, type) {
+      dispatch(addFaceDesc(userId, img, type))
     }
   }
 }
