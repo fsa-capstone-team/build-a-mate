@@ -54,10 +54,10 @@ const User = db.define('user', {
     defaultValue: ['https://image.flaticon.com/icons/svg/149/149071.svg']
   },
   bwPhoto: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   createdFace: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   }
 })
 

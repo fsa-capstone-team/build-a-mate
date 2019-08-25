@@ -21,10 +21,10 @@ class UploadBWFace extends Component {
 
   async handleSubmit(e) {
     e.preventDefault()
-    const data = this.state.file.src.split(',')[1]
+    const data = this.state.file
     console.log(data)
     console.log(this.props.id)
-    this.props.uploadBWFace(this.props.id, {file: data})
+    this.props.uploadBWFace(this.props.id, data)
   }
 
   setRef = webcam => {
