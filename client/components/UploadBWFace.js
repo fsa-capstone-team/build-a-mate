@@ -9,9 +9,7 @@ require('../../secrets')
 class UploadBWFace extends Component {
   constructor() {
     super()
-    this.state = {
-      file: null
-    }
+    this.state = {}
     this.capture = this.capture.bind(this)
   }
 
