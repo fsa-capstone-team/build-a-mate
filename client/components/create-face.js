@@ -23,17 +23,17 @@ const styles = () => ({
 
 class CreateFace extends Component {
   handleScreenShot = () => {
-    const body = document.querySelector('body')
+    const body = document.querySelector('#faceCanvas')
     console.log(body)
     html2canvas(body).then(canvas => {
       let croppedCanvas = document.createElement('canvas')
       let croppedCanvasContext = croppedCanvas.getContext('2d')
 
-      croppedCanvas.width = 800
-      croppedCanvas.height = 800
+      croppedCanvas.width = 150
+      croppedCanvas.height = 150
 
-      croppedCanvasContext.drawImage(canvas, 0, 0, 800, 800, 0, 0, 800, 800)
-      const img = croppedCanvas //.toDataURL().split(',')[1]
+      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 25, 25, 150, 150)
+      const img = croppedCanvas.toDataURL() //.split(',')[1]
       console.log('CROPPED:', img)
       console.log(this.props.id)
       this.props.setParentState('createdFaceImg', img)
@@ -51,20 +51,26 @@ class CreateFace extends Component {
         </Grid>
         <Grid item xs={6} className={classes.canvas}>
           <div id="faceCanvas">
-            <FaceCanvas template={template} currentFeatures={currentFeatures} />
-            <CustomDragLayer />
-          </div>
-          <div>
-            <Button
-              variant="contained"
-              size="small"
-              color="primary"
-              type="submit"
-              onClick={this.handleScreenShot}
-            >
-              Capture Face
-              <PhotoCamera />
-            </Button>
+            <div>
+              <FaceCanvas
+                template={template}
+                currentFeatures={currentFeatures}
+              />
+              <CustomDragLayer />
+            </div>
+
+            <div>
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                type="submit"
+                onClick={this.handleScreenShot}
+              >
+                Capture Face
+                <PhotoCamera />
+              </Button>
+            </div>
           </div>
         </Grid>
       </Grid>

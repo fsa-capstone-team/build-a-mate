@@ -26,7 +26,7 @@ class CreateFace extends Component {
     super()
     this.state = {
       heads: [
-        'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
+        '/image/face.jpg',
         'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
         'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
         'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
