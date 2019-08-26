@@ -6,7 +6,7 @@ const User = require('../db/models/user')
 const faceapi = require('face-api.js')
 module.exports = router
 
-router.post('/uploadbwface/:id', async (req, res, next) => {
+router.post('/bwFaceDesc/:id', async (req, res, next) => {
   try {
     // imgur.setClientId(process.env.IMGUR_CLIENT_ID)
     // imgur.setCredentials(
@@ -34,16 +34,16 @@ router.post('/uploadbwface/:id', async (req, res, next) => {
     // // FACE API CALCULATIONS
     // await faceapi.loadFaceRecognitionModel('/models')
     // //const img = await faceapi.fetchImage(link)
-    // const bwPhoto = await faceapi.computeFaceDescriptor(img)
-    // console.log('desc:', bwPhoto)
+    // const bwFace = await faceapi.computeFaceDescriptor(img)
+    // console.log('desc:', bwFace)
 
     // SAVE FACE DESCRIPTOR TO USER INSTANCE
     console.log('HERE!')
-    console.log(req.body.file)
-    const data = JSON.stringify(req.body.file)
+    console.log(req.body.faceDesc)
+    const data = JSON.stringify(Array.from(req.body.faceDesc))
     const user = await User.findByPk(req.params.id)
     console.log(user)
-    await user.update({bwPhoto: data})
+    await user.update({bwFaceDesc: data})
     console.log(user)
     res.send(user)
   } catch (err) {
@@ -51,7 +51,7 @@ router.post('/uploadbwface/:id', async (req, res, next) => {
   }
 })
 
-router.post('/createface/:id', async (req, res, next) => {
+router.post('/createdFaceDesc/:id', async (req, res, next) => {
   try {
     // imgur.setClientId(process.env.IMGUR_CLIENT_ID)
     // imgur.setCredentials(
@@ -89,9 +89,9 @@ router.post('/createface/:id', async (req, res, next) => {
     console.log('HERE!')
     const user = await User.findByPk(req.params.id)
     console.log(user)
-    console.log(req.body.file)
-    const data = JSON.stringify(req.body.file)
-    await user.update({createdFace: data})
+    console.log(req.body.faceDesc)
+    const data = JSON.stringify(Array.from(req.body.faceDesc))
+    await user.update({createdFaceDesc: data})
     console.log(user)
     res.send(user)
   } catch (err) {

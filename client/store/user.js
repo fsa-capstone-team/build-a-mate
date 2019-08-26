@@ -76,34 +76,15 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const uploadBWFace = (userId, data) => async dispatch => {
+export const addFaceDesc = (userId, img, type) => async dispatch => {
   try {
     await faceapi.loadFaceRecognitionModel('/models')
-    const bwFace = await faceapi.computeFaceDescriptor(data)
-    console.log(bwFace)
-    const res = await axios.post(`api/imgur/uploadbwface/${userId}`, {
-      file: bwFace
-    })
+    const faceDesc = await faceapi.computeFaceDescriptor(img)
+    console.log(faceDesc)
+    console.log('TYPE:', typeof faceDesc)
+    const res = await axios.post(`api/imgur/${type}/${userId}`, {faceDesc})
     console.log('USER:', res.data)
     dispatch(getUser(res.data))
-    history.push('/create-face')
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-export const saveCreatedFace = (userId, data) => async dispatch => {
-  try {
-    await faceapi.loadFaceRecognitionModel('/models')
-    const createdFace = await faceapi.computeFaceDescriptor(data)
-    console.log(createdFace)
-    console.log('TYPE:', typeof createdFace)
-    const res = await axios.post(`api/imgur/createface/${userId}`, {
-      file: createdFace
-    })
-    console.log('USER:', res.data)
-    dispatch(getUser(res.data))
-    history.push('/matches')
   } catch (err) {
     console.error(err)
   }

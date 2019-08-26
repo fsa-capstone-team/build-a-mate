@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Webcam from 'react-webcam'
-import axios from 'axios'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-import Selfie from './selfie'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
-import {uploadBWFace} from '../store'
 require('../../secrets')
 
 class UploadBWFace extends Component {
@@ -15,16 +12,7 @@ class UploadBWFace extends Component {
     this.state = {
       file: null
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.capture = this.capture.bind(this)
-  }
-
-  async handleSubmit(e) {
-    e.preventDefault()
-    const data = this.state.file
-    console.log(data)
-    console.log(this.props.id)
-    this.props.uploadBWFace(this.props.id, data)
   }
 
   setRef = webcam => {
@@ -35,17 +23,17 @@ class UploadBWFace extends Component {
     var img = new Image()
     const imageSrc = this.webcam.getScreenshot()
     img.src = imageSrc
-    this.setState({file: img})
+    this.props.setParentState('bwFaceImg', img)
   }
 
   render() {
-    console.log(this.state)
-
     const videoConstraints = {
       width: 150,
       height: 150,
       facingMode: 'user'
     }
+
+    const {bwFaceImg} = this.props
 
     return (
       <div>
@@ -76,11 +64,7 @@ class UploadBWFace extends Component {
             Capture photo
             <PhotoCamera />
           </Button>
-          <div>
-            {this.state.file && (
-              <Selfie img={this.state.file.src} onSubmit={this.handleSubmit} />
-            )}
-          </div>
+          {bwFaceImg && <img src={bwFaceImg.src} />}
         </Box>
       </div>
     )
@@ -91,8 +75,4 @@ const mapStateToProps = state => ({
   id: state.user.id
 })
 
-const mapDispatchToProps = dispatch => ({
-  uploadBWFace: (id, obj) => dispatch(uploadBWFace(id, obj))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(UploadBWFace)
+export default connect(mapStateToProps)(UploadBWFace)

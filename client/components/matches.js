@@ -15,13 +15,12 @@ class Matches extends Component {
       this.props.id,
       this.props.gender,
       this.props.genderPreference,
-      this.props.createdFace
+      this.props.createdFaceDesc
     )
   }
 
   render() {
     const {matches} = this.props
-    console.log(matches)
 
     return (
       <Box
@@ -43,15 +42,15 @@ const mapStateToProps = function(state) {
     id: state.user.id,
     gender: state.user.gender,
     genderPreference: state.user.genderPreference,
-    createdFace: state.user.createdFace,
+    createdFaceDesc: state.user.createdFaceDesc,
     matches: state.matches
   }
 }
 
 const mapDispatchToProps = function(dispatch) {
   return {
-    getMatches(id, gender, genderPreference, createdFace) {
-      dispatch(getMatches(id, gender, genderPreference, createdFace))
+    getMatches(id, gender, genderPreference, createdFaceDesc) {
+      dispatch(getMatches(id, gender, genderPreference, createdFaceDesc))
     }
   }
 }
