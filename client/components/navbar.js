@@ -62,8 +62,8 @@ const Navbar = ({handleClick, accountCreated, signupCompleted}) => {
             {accountCreated ? (
               <div>
                 {/* The header will show these links after you log in */}
-                <Button color="inherit" to="/profile" component={NavLink}>
-                  Profile
+                <Button color="inherit" to="/matches" component={NavLink}>
+                  Matches
                 </Button>
                 <Button color="inherit" onClick={handleClick}>
                   Logout
@@ -89,7 +89,7 @@ const mapState = state => {
   return {
     // isLoggedIn: !!state.user.id
     accountCreated: !!state.user.id,
-    signupCompleted: !!state.user.firstName
+    signupCompleted: !!state.user.createdFaceDesc
   }
 }
 

@@ -76,7 +76,7 @@ const mapState = state => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     // isLoggedIn: !!state.user.id,
     accountCreated: !!state.user.id,
-    signupCompleted: !!state.user.firstName
+    signupCompleted: !!state.user.createdFaceDesc
   }
 }
 

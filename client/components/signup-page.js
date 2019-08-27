@@ -7,7 +7,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import {SignupForm, UploadBWFace, CreateFace, Matches} from '../components'
+import {SignupForm, UploadBWFace, CreateFace} from '../components'
 import {editInfo, addFaceDesc} from '../store'
 
 const styles = () => ({
@@ -60,7 +60,7 @@ class SignupPage extends Component {
         'image/add-photo.png'
       ],
       bwFaceImg: null,
-      createdFaceImg: null
+      createdFaceImg: '/image/beyonce.png'
     }
     this.handleChange = this.handleChange.bind(this)
     this.setParentState = this.setParentState.bind(this)
@@ -114,6 +114,7 @@ class SignupPage extends Component {
         this.state.createdFaceImg,
         'createdFaceDesc'
       )
+      return
     }
 
     this.setState(prevState => ({
@@ -191,44 +192,33 @@ class SignupPage extends Component {
             setParentState={this.setParentState}
             {...this.state}
           />
-        ) : (
-          <Matches />
-        )}
+        ) : null}
         <Box
           display="flex"
           justifyContent="flex-end"
           className={classes.buttons}
         >
-          {activeStep === steps.length ? (
+          <div>
+            <Typography className={classes.instructions}>
+              {this.getStepContent(activeStep)}
+            </Typography>
             <div>
-              <Typography className={classes.instructions}>
-                All steps completed
-              </Typography>
-              <Button onClick={this.handleReset}>Build a new face</Button>
+              <Button
+                disabled={activeStep === 0}
+                onClick={this.handleBack}
+                className={classes.backButton}
+              >
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleNext}
+              >
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
             </div>
-          ) : (
-            <div>
-              <Typography className={classes.instructions}>
-                {this.getStepContent(activeStep)}
-              </Typography>
-              <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={this.handleBack}
-                  className={classes.backButton}
-                >
-                  Back
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </div>
-            </div>
-          )}
+          </div>
         </Box>
       </Box>
     )

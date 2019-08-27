@@ -49,7 +49,11 @@ export const auth = (email, password, method) => async dispatch => {
   } else {
     try {
       dispatch(getUser(res.data))
-      history.push('/matches')
+      if (res.data.createdFaceDesc) {
+        history.push('/matches')
+      } else {
+        history.push('/signup')
+      }
     } catch (dispatchOrHistoryErr) {
       console.error(dispatchOrHistoryErr)
     }
@@ -79,12 +83,20 @@ export const logout = () => async dispatch => {
 export const addFaceDesc = (userId, img, type) => async dispatch => {
   try {
     await faceapi.loadFaceRecognitionModel('/models')
-    const faceDesc = await faceapi.computeFaceDescriptor(img)
-    console.log(faceDesc)
-    console.log('TYPE:', typeof faceDesc)
-    const res = await axios.post(`api/imgur/${type}/${userId}`, {faceDesc})
-    console.log('USER:', res.data)
-    dispatch(getUser(res.data))
+    if (type === 'createdFaceDesc') {
+      const image = await faceapi.fetchImage(img)
+      const faceDesc = await faceapi.computeFaceDescriptor(image)
+      const res = await axios.post(`api/imgur/${type}/${userId}`, {faceDesc})
+      await dispatch(getUser(res.data))
+      history.push('/matches')
+    } else {
+      const faceDesc = await faceapi.computeFaceDescriptor(img)
+      console.log(faceDesc)
+      console.log('TYPE:', typeof faceDesc)
+      const res = await axios.post(`api/imgur/${type}/${userId}`, {faceDesc})
+      console.log('USER:', res.data)
+      await dispatch(getUser(res.data))
+    }
   } catch (err) {
     console.error(err)
   }
