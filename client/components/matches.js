@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getMatches} from '../store'
 import {Profile} from '../components'
@@ -20,15 +21,25 @@ class Matches extends Component {
     console.log('REACHED MATCHES!')
 
     return (
-      <Box
-        display="flex"
-        flexDirection="row"
-        justifyContent="space-around"
-        alignItems="center"
-      >
-        {matches.map(match => {
-          return <Profile key={match.id} {...match} />
-        })}
+      <Box display="flex" flexDirection="column">
+        <Box display="flex" justifyContent="center">
+          <h1>Here are your top matches!</h1>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          {matches.map(match => {
+            return <Profile key={match.id} {...match} />
+          })}
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <NavLink to="/create-face">
+            <h2>Build another face for new matches!</h2>
+          </NavLink>
+        </Box>
       </Box>
     )
   }

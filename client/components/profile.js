@@ -67,13 +67,20 @@ class Profile extends Component {
     const {
       classes,
       firstName,
-      age,
+      month,
+      day,
+      year,
       summary,
       photos,
       euclideanDistance
     } = this.props
     const {activeStep} = this.state
     const maxSteps = photos.length
+
+    const birthday = new Date(year, month - 1, day)
+    const age = Math.abs(
+      new Date(Date.now() - birthday.getTime()).getUTCFullYear() - 1970
+    )
 
     return (
       <div className={classes.root}>

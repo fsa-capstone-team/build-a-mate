@@ -100,9 +100,9 @@ class SignupPage extends Component {
             alignItems="center"
             justifyContent="space-around"
           >
-            <img src="image/snail_couple.png" width="20%" />
+            <img src="image/bam-2.png" width="20%" />
             <SignupForm step={this.step} />
-            <img src="image/snail_couple.png" width="20%" />
+            <img src="image/bam-5.png" width="20%" />
           </Box>
         ) : activeStep === 1 ? (
           <Box
@@ -112,9 +112,9 @@ class SignupPage extends Component {
             alignItems="center"
             justifyContent="space-around"
           >
-            <img src="image/snail_couple.png" width="20%" />
+            <img src="image/bam-4.png" width="20%" />
             <UploadBWFace step={this.step} stepBack={this.stepBack} />
-            <img src="image/snail_couple.png" width="20%" />
+            <img src="image/bam-6.png" width="20%" />
           </Box>
         ) : (
           <CreateFace />

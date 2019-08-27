@@ -52,7 +52,7 @@ class CreateFace extends Component {
         'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg'
       ],
       noses: [
-        'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
+        '/image/nose.png',
         'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
         'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
         'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',

@@ -46,7 +46,7 @@ class UploadBWFace extends Component {
     }
 
     return (
-      <div>
+      <Box display="flex" flexDirection="column" alignItems="center">
         <h1>Upload Face</h1>
         <Button
           variant="contained"
@@ -93,7 +93,7 @@ class UploadBWFace extends Component {
             {this.state.bwFaceImg && <Selfie img={this.state.bwFaceImg.src} />}
           </div>
         </Box>
-      </div>
+      </Box>
     )
   }
 }

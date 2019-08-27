@@ -32,7 +32,7 @@ export const getMatches = () => async (dispatch, getState) => {
     // console.time('sort')
     matches = matches
       .sort((a, b) => a.euclideanDistance - b.euclideanDistance)
-      .slice(0, 5)
+      .slice(0, 4)
     // console.timeEnd('sort')
     // console.timeEnd('total')
     console.log(matches)
