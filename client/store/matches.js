@@ -21,12 +21,12 @@ export const getMatches = (
       genderPreference
     })
     const parsedCreatedFaceDesc = await new Float32Array(
-      JSON.parse(createdFaceDesc)
+      Object.values(JSON.parse(createdFaceDesc))
     )
     let users = await Promise.all(
       data.map(async user => {
         const parsedBwFaceDesc = await new Float32Array(
-          JSON.parse(user.bwFaceDesc)
+          Object.values(JSON.parse(user.bwFaceDesc))
         )
         const euclideanDistance = await faceapi.euclideanDistance(
           parsedCreatedFaceDesc,

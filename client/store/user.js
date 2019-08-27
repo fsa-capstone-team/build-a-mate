@@ -49,7 +49,11 @@ export const auth = (email, password, method) => async dispatch => {
   } else {
     try {
       dispatch(gotUser(res.data))
-      history.push('/matches')
+      if (res.data.createdFaceDesc) {
+        history.push('/matches')
+      } else {
+        history.push('/signup')
+      }
     } catch (dispatchOrHistoryErr) {
       console.error(dispatchOrHistoryErr)
     }

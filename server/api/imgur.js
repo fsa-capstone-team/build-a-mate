@@ -86,7 +86,6 @@ router.post('/createdFaceDesc/:id', async (req, res, next) => {
     // console.log('desc:', createdFace)
 
     // SAVE FACE DESCRIPTOR TO USER INSTANCE
-    console.log('HERE!')
     const user = await User.findByPk(req.params.id)
     console.log(user)
     console.log(req.body.faceDesc)

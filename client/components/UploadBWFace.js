@@ -13,7 +13,6 @@ class UploadBWFace extends Component {
   constructor() {
     super()
     this.state = {
-      //file: null,
       bwFaceImg: ''
     }
   }
