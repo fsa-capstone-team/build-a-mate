@@ -176,16 +176,26 @@ class SignupPage extends Component {
             alignItems="center"
             justifyContent="space-around"
           >
-            <img src="image/snail_couple.png" width="20%" />
+            <img src="image/bam-2.png" width="20%" />
             <SignupForm handleChange={this.handleChange} {...this.state} />
-            <img src="image/snail_couple.png" width="20%" />
+            <img src="image/bam-5.png" width="20%" />
           </Box>
         ) : activeStep === 1 ? (
-          <UploadBWFace
-            id={this.props.id}
-            setParentState={this.setParentState}
-            {...this.state}
-          />
+          <Box
+            display="flex"
+            width="100%"
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="space-around"
+          >
+            <img src="image/bam-4.png" width="20%" />
+            <UploadBWFace
+              id={this.props.id}
+              setParentState={this.setParentState}
+              {...this.state}
+            />
+            <img src="image/bam-6.png" width="20%" />
+          </Box>
         ) : activeStep === 2 ? (
           <CreateFace
             id={this.props.id}
