@@ -38,9 +38,13 @@ router.post('/bwFaceDesc/:id', async (req, res, next) => {
     // console.log('desc:', bwFace)
 
     // SAVE FACE DESCRIPTOR TO USER INSTANCE
-    const data = JSON.stringify(req.body.faceDesc)
+    console.log('HERE!')
+    console.log(req.body.faceDesc)
+    const bwFaceDesc = JSON.stringify(req.body.faceDesc)
     const user = await User.findByPk(req.params.id)
-    await user.update({bwFaceDesc: data})
+    console.log(user)
+    await user.update({bwFaceDesc})
+    console.log('USER:', user)
     res.send(user)
   } catch (err) {
     next(err)
@@ -83,8 +87,11 @@ router.post('/createdFaceDesc/:id', async (req, res, next) => {
 
     // SAVE FACE DESCRIPTOR TO USER INSTANCE
     const user = await User.findByPk(req.params.id)
-    const data = JSON.stringify(req.body.faceDesc)
-    await user.update({createdFaceDesc: data})
+    console.log(user)
+    console.log(req.body.faceDesc)
+    const createdFaceDesc = JSON.stringify(req.body.faceDesc)
+    await user.update({createdFaceDesc})
+    console.log(user)
     res.send(user)
   } catch (err) {
     next(err)

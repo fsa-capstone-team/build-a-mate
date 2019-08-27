@@ -1,14 +1,10 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import {SignupForm, UploadBWFace, CreateFace} from '../components'
-import {editInfo, addFaceDesc} from '../store'
+import {SignupForm, UploadBWFace, CreateFace, Matches} from '../components'
 
 const styles = () => ({
   root: {
@@ -42,99 +38,11 @@ class SignupPage extends Component {
   constructor() {
     super()
     this.state = {
-      activeStep: 0,
-      firstName: null,
-      lastName: null,
-      month: null,
-      day: null,
-      year: null,
-      gender: null,
-      genderPreference: null,
-      summary: null,
-      photos: [
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png',
-        'image/add-photo.png'
-      ],
-      bwFaceImg: null,
-      createdFaceImg: '/image/beyonce.png'
+      activeStep: 0
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.setParentState = this.setParentState.bind(this)
-    this.handleNext = this.handleNext.bind(this)
-    this.handleBack = this.handleBack.bind(this)
-    this.handleReset = this.handleReset.bind(this)
-    this.getStepContent = this.getStepContent.bind(this)
   }
 
-  handleChange(event) {
-    event.preventDefault()
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  setParentState(type, img) {
-    this.setState({
-      [type]: img
-    })
-  }
-
-  handleNext() {
-    const birthday = new Date(
-      this.state.year,
-      this.state.month - 1,
-      this.state.day
-    )
-    const age = Math.abs(
-      new Date(Date.now() - birthday.getTime()).getUTCFullYear() - 1970
-    )
-    if (this.state.activeStep === 0 && age < 18) {
-      alert('You must be at least 18 years old to sign up.')
-      return
-    } else if (this.state.activeStep === 0 && age >= 18) {
-      this.props.updateInfo({
-        id: this.props.id,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        age,
-        gender: this.state.gender,
-        genderPreference: this.state.genderPreference,
-        summary: this.state.summary,
-        photos: this.state.photos
-      })
-    } else if (this.state.activeStep === 1) {
-      this.props.addFaceDesc(this.props.id, this.state.bwFaceImg, 'bwFaceDesc')
-    } else if (this.state.activeStep === 2) {
-      this.props.addFaceDesc(
-        this.props.id,
-        this.state.createdFaceImg,
-        'createdFaceDesc'
-      )
-      return
-    }
-
-    this.setState(prevState => ({
-      activeStep: prevState.activeStep + 1
-    }))
-  }
-
-  handleBack() {
-    this.setState(prevState => ({
-      activeStep: prevState.activeStep - 1
-    }))
-  }
-
-  handleReset() {
-    this.setState({
-      activeStep: 2
-    })
-  }
-
-  getStepContent(stepIndex) {
+  getStepContent = stepIndex => {
     switch (stepIndex) {
       case 0:
         return 'Please fill in all required fields.'
@@ -147,11 +55,27 @@ class SignupPage extends Component {
     }
   }
 
+  step = () => {
+    console.log('STEP:', this.state.activeStep)
+    this.setState(prevState => ({
+      activeStep: prevState.activeStep + 1
+    }))
+    console.log('NEXT STEP:', this.state.activeStep)
+  }
+
+  stepBack = () => {
+    console.log('STEP:', this.state.activeStep)
+    this.setState(prevState => ({
+      activeStep: prevState.activeStep - 1
+    }))
+    console.log('NEXT STEP:', this.state.activeStep)
+  }
+
   render() {
     const {activeStep} = this.state
     const {classes} = this.props
 
-    console.log(this.state)
+    console.log('STATE:', this.state)
 
     return (
       <Box display="flex" flexDirection="column" className={classes.root}>
@@ -177,7 +101,7 @@ class SignupPage extends Component {
             justifyContent="space-around"
           >
             <img src="image/bam-2.png" width="20%" />
-            <SignupForm handleChange={this.handleChange} {...this.state} />
+            <SignupForm step={this.step} />
             <img src="image/bam-5.png" width="20%" />
           </Box>
         ) : activeStep === 1 ? (
@@ -189,69 +113,15 @@ class SignupPage extends Component {
             justifyContent="space-around"
           >
             <img src="image/bam-4.png" width="20%" />
-            <UploadBWFace
-              id={this.props.id}
-              setParentState={this.setParentState}
-              {...this.state}
-            />
+            <UploadBWFace step={this.step} stepBack={this.stepBack} />
             <img src="image/bam-6.png" width="20%" />
           </Box>
-        ) : activeStep === 2 ? (
-          <CreateFace
-            id={this.props.id}
-            setParentState={this.setParentState}
-            {...this.state}
-          />
-        ) : null}
-        <Box
-          display="flex"
-          justifyContent="flex-end"
-          className={classes.buttons}
-        >
-          <div>
-            <Typography className={classes.instructions}>
-              {this.getStepContent(activeStep)}
-            </Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={this.handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleNext}
-              >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
-            </div>
-          </div>
-        </Box>
+        ) : (
+          <CreateFace />
+        )}
       </Box>
     )
   }
 }
 
-const mapStateToProps = function(state) {
-  return {
-    id: state.user.id
-  }
-}
-
-const mapDispatchToProps = function(dispatch) {
-  return {
-    updateInfo(userObject) {
-      dispatch(editInfo(userObject))
-    },
-    addFaceDesc(userId, img, type) {
-      dispatch(addFaceDesc(userId, img, type))
-    }
-  }
-}
-
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(SignupPage)
-)
+export default withStyles(styles)(SignupPage)

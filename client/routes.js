@@ -43,6 +43,7 @@ class Routes extends Component {
           <Route path="/face-api" component={FaceapiTest} />
           <Route path="/upload-bw-face" component={UploadBWFace} />
           <Route path="/create-face" component={CreateFace} />
+          {/* <Route path="/matches" component={Matches} /> */}
           {accountCreated &&
             signupCompleted && (
               <Switch>

@@ -37,8 +37,17 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING
   },
-  age: {
-    type: Sequelize.INTEGER
+  // age: {
+  //   type: Sequelize.INTEGER
+  // },
+  month: {
+    type: Sequelize.STRING
+  },
+  day: {
+    type: Sequelize.STRING
+  },
+  year: {
+    type: Sequelize.STRING
   },
   summary: {
     type: Sequelize.TEXT
@@ -51,7 +60,14 @@ const User = db.define('user', {
   },
   photos: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
-    defaultValue: ['https://image.flaticon.com/icons/svg/149/149071.svg']
+    defaultValue: [
+      'image/add-photo.png',
+      'image/add-photo.png',
+      'image/add-photo.png',
+      'image/add-photo.png',
+      'image/add-photo.png',
+      'image/add-photo.png'
+    ]
   },
   bwFaceDesc: {
     type: Sequelize.TEXT

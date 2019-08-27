@@ -6,22 +6,19 @@ import {Profile} from '../components'
 import Box from '@material-ui/core/Box'
 
 class Matches extends Component {
-  constructor() {
-    super()
-    this.state = {}
-  }
+  // constructor() {
+  //   super()
+  //   this.state = {}
+  // }
 
   componentDidMount() {
-    this.props.getMatches(
-      this.props.id,
-      this.props.gender,
-      this.props.genderPreference,
-      this.props.createdFaceDesc
-    )
+    console.log('IN MATCHES')
+    this.props.getMatches()
   }
 
   render() {
     const {matches} = this.props
+    console.log('REACHED MATCHES!')
 
     return (
       <Box display="flex" flexDirection="column">
@@ -48,22 +45,12 @@ class Matches extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
-  return {
-    id: state.user.id,
-    gender: state.user.gender,
-    genderPreference: state.user.genderPreference,
-    createdFaceDesc: state.user.createdFaceDesc,
-    matches: state.matches
-  }
-}
+const mapStateToProps = state => ({
+  matches: state.matches
+})
 
-const mapDispatchToProps = function(dispatch) {
-  return {
-    getMatches(id, gender, genderPreference, createdFaceDesc) {
-      dispatch(getMatches(id, gender, genderPreference, createdFaceDesc))
-    }
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getMatches: () => dispatch(getMatches())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches)
