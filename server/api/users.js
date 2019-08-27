@@ -16,14 +16,23 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/matches', async (req, res, next) => {
+router.get('/matches/:id', async (req, res, next) => {
   try {
-    const {gender, genderPreference} = req.body
-    const users = await User.findAll({
-      where: {gender: genderPreference, genderPreference: gender},
-      attributes: ['id', 'firstName', 'age', 'summary', 'photos', 'bwFaceDesc']
+    const user = await User.findByPk(req.params.id)
+    const matches = await User.findAll({
+      where: {gender: user.genderPreference, genderPreference: user.gender},
+      attributes: [
+        'id',
+        'firstName',
+        'month',
+        'day',
+        'year',
+        'summary',
+        'photos',
+        'bwFaceDesc'
+      ]
     })
-    res.send(users)
+    res.send(matches)
   } catch (err) {
     next(err)
   }
