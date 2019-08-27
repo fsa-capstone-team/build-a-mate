@@ -37,8 +37,14 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING
   },
-  age: {
-    type: Sequelize.INTEGER
+  month: {
+    type: Sequelize.STRING
+  },
+  day: {
+    type: Sequelize.STRING
+  },
+  year: {
+    type: Sequelize.STRING
   },
   summary: {
     type: Sequelize.TEXT

@@ -31,9 +31,21 @@ class CreateFace extends Component {
 
       croppedCanvas.width = 150
       croppedCanvas.height = 150
+      let disWidth = 0.17 * croppedCanvas.width
+      let disHeight = 0.17 * croppedCanvas.height
 
-      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 25, 25, 150, 150)
-      const img = croppedCanvas.toDataURL() //.split(',')[1]
+      croppedCanvasContext.drawImage(
+        canvas,
+        0,
+        0,
+        802,
+        802,
+        disWidth,
+        disHeight,
+        130,
+        130
+      )
+      const img = croppedCanvas.toDataURL().split(',')[1]
       console.log('CROPPED:', img)
       console.log(this.props.id)
       this.props.setParentState('createdFaceImg', img)
