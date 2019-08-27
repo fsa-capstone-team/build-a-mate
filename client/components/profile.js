@@ -64,7 +64,14 @@ class Profile extends Component {
   }
 
   render() {
-    const {classes, firstName, age, summary, photos} = this.props
+    const {
+      classes,
+      firstName,
+      age,
+      summary,
+      photos,
+      euclideanDistance
+    } = this.props
     const {activeStep} = this.state
     const maxSteps = photos.length
 
@@ -112,9 +119,11 @@ class Profile extends Component {
             <Grid item xs className={classes.content}>
               <Typography variant="h4">{`${firstName}, ${age}`}</Typography>
             </Grid>
-            {/* <Grid item className={classes.content}>
-              <Typography variant="h4">90% Match</Typography>
-            </Grid> */}
+            <Grid item className={classes.content}>
+              <Typography variant="h5">
+                {Math.round((1 - euclideanDistance) * 100)}% Match
+              </Typography>
+            </Grid>
           </Grid>
           <Divider variant="middle" />
           <div className={classes.content}>
