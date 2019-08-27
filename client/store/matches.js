@@ -39,7 +39,7 @@ export const getMatches = (
     // console.time('sort')
     const matches = users
       .sort((a, b) => a.euclideanDistance - b.euclideanDistance)
-      .slice(0, 5)
+      .slice(0, 4)
     // console.timeEnd('sort')
     // console.timeEnd('total')
     console.log(matches)

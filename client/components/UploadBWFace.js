@@ -34,9 +34,8 @@ class UploadBWFace extends Component {
     const {bwFaceImg} = this.props
 
     return (
-      <div>
+      <Box display="flex" flexDirection="column" alignItems="center">
         <h1>Upload Face</h1>
-
         <Box
           display="flex"
           justifyContent="center"
@@ -64,7 +63,7 @@ class UploadBWFace extends Component {
           </Button>
           {bwFaceImg && <img src={bwFaceImg.src} />}
         </Box>
-      </div>
+      </Box>
     )
   }
 }

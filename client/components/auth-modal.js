@@ -8,11 +8,11 @@ import Button from '@material-ui/core/Button'
 const styles = () => ({
   paper: {
     position: 'absolute',
+    height: 350,
     width: 400,
-    backgroundColor: '#FDC9D3',
-    border: '2px solid #000',
-    boxShadow: 'red',
-    padding: 2
+    backgroundColor: '#E4E9FE',
+    borderRadius: '10px',
+    padding: '2%'
   }
 })
 
@@ -68,7 +68,7 @@ class AuthModal extends Component {
           onClose={this.handleCloseLogin}
         >
           <div style={this.state.modalStyle} className={classes.paper}>
-            <h2 id="simple-modal-title">Log In</h2>
+            {/* <h2 id="simple-modal-title">Log In</h2> */}
             <div id="simple-modal-description">
               <Login />
             </div>
@@ -81,7 +81,7 @@ class AuthModal extends Component {
           onClose={this.handleCloseSignup}
         >
           <div style={this.state.modalStyle} className={classes.paper}>
-            <h2 id="simple-modal-title">Sign Up</h2>
+            {/* <h2 id="simple-modal-title">Sign Up</h2> */}
             <div id="simple-modal-description">
               <Signup />
             </div>
