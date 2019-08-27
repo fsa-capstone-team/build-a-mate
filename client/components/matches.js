@@ -11,6 +11,7 @@ class Matches extends Component {
   }
 
   componentDidMount() {
+    console.log('IN MATCHES')
     this.props.getMatches(
       this.props.id,
       this.props.gender,
@@ -21,6 +22,7 @@ class Matches extends Component {
 
   render() {
     const {matches} = this.props
+    console.log('REACHED MATCHES!')
 
     return (
       <Box

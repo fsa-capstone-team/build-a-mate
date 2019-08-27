@@ -9,6 +9,10 @@ import {Button} from '@material-ui/core'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import html2canvas from 'html2canvas'
 import {addFaceDesc} from '../store'
+import grayscale from 'image-filter-grayscale'
+import imageFilterCore from 'image-filter-core'
+import history from '../history'
+import {withRouter} from 'react-router-dom'
 
 const styles = () => ({
   features: {
@@ -22,9 +26,17 @@ const styles = () => ({
 })
 
 class CreateFace extends Component {
-  handleScreenShot = () => {
+  constructor() {
+    super()
+    this.state = {
+      createdFaceImg: ''
+    }
+  }
+
+  handleScreenShot = async () => {
     const body = document.querySelector('#faceCanvas')
-    console.log(body)
+    console.log('BODY:', body)
+    const createdFaceImg = new Image()
     html2canvas(body).then(canvas => {
       let croppedCanvas = document.createElement('canvas')
       let croppedCanvasContext = croppedCanvas.getContext('2d')
@@ -32,13 +44,21 @@ class CreateFace extends Component {
       croppedCanvas.width = 150
       croppedCanvas.height = 150
 
-      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 25, 25, 150, 150)
-      const img = croppedCanvas.toDataURL() //.split(',')[1]
-      console.log('CROPPED:', img)
-      console.log(this.props.id)
-      this.props.setParentState('createdFaceImg', img)
-      // this.props.addFaceDesc(this.props.id, img, 'createdFaceDesc')
+      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 25, 25, 130, 130)
+      const imgData = croppedCanvasContext.getImageData(0, 0, 130, 130)
+
+      grayscale(imgData, 4).then(function(result) {
+        const src = imageFilterCore.convertImageDataToCanvasURL(result)
+        console.log('CANVASURL:', src)
+        createdFaceImg.src = src
+      })
+
+      this.setState({createdFaceImg})
     })
+    console.log('HISTORY:', history)
+    await this.props.addFaceDesc(createdFaceImg, 'createdFaceDesc')
+    console.log('HISTORY2:', this.props.history)
+    history.push('/matches')
   }
 
   render() {
@@ -58,7 +78,6 @@ class CreateFace extends Component {
               />
               <CustomDragLayer />
             </div>
-
             <div>
               <Button
                 variant="contained"
@@ -67,7 +86,7 @@ class CreateFace extends Component {
                 type="submit"
                 onClick={this.handleScreenShot}
               >
-                Capture Face
+                Submit Face
                 <PhotoCamera />
               </Button>
             </div>
@@ -79,14 +98,17 @@ class CreateFace extends Component {
 }
 
 const mapStateToProps = state => ({
-  id: state.user.id,
   template: state.currentTemplate,
   currentFeatures: state.currentFeatures
 })
 
 const mapDispatchToProps = dispatch => ({
-  addFaceDesc: (userId, img, type) => dispatch(addFaceDesc(userId, img, type))
+  addFaceDesc: (createdFaceImg, type) =>
+    dispatch(addFaceDesc(createdFaceImg, type))
 })
+
+// export default withRouter(withStyles(styles)(
+//   connect(mapStateToProps, mapDispatchToProps)(CreateFace)))
 
 export default withStyles(styles)(
   connect(mapStateToProps, mapDispatchToProps)(CreateFace)

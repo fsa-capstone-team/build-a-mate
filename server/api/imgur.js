@@ -40,11 +40,11 @@ router.post('/bwFaceDesc/:id', async (req, res, next) => {
     // SAVE FACE DESCRIPTOR TO USER INSTANCE
     console.log('HERE!')
     console.log(req.body.faceDesc)
-    const data = JSON.stringify(Array.from(req.body.faceDesc))
+    const bwFaceDesc = JSON.stringify(req.body.faceDesc)
     const user = await User.findByPk(req.params.id)
     console.log(user)
-    await user.update({bwFaceDesc: data})
-    console.log(user)
+    await user.update({bwFaceDesc})
+    console.log('USER:', user)
     res.send(user)
   } catch (err) {
     next(err)
@@ -90,8 +90,8 @@ router.post('/createdFaceDesc/:id', async (req, res, next) => {
     const user = await User.findByPk(req.params.id)
     console.log(user)
     console.log(req.body.faceDesc)
-    const data = JSON.stringify(Array.from(req.body.faceDesc))
-    await user.update({createdFaceDesc: data})
+    const createdFaceDesc = JSON.stringify(req.body.faceDesc)
+    await user.update({createdFaceDesc})
     console.log(user)
     res.send(user)
   } catch (err) {

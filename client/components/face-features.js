@@ -34,7 +34,7 @@ class CreateFace extends Component {
         'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg'
       ],
       eyebrows: [
-        'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
+        '/image/Eyebrows.png',
         'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
         'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
         'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
@@ -43,7 +43,7 @@ class CreateFace extends Component {
         'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png'
       ],
       eyes: [
-        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
+        '/image/eyes.jpg',
         'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
         'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
         'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
@@ -61,7 +61,7 @@ class CreateFace extends Component {
         'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg'
       ],
       mouths: [
-        'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
+        '/image/lips.jpg',
         'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
         'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
         'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',

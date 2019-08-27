@@ -43,6 +43,7 @@ class Routes extends Component {
           <Route path="/face-api" component={FaceapiTest} />
           <Route path="/upload-bw-face" component={UploadBWFace} />
           <Route path="/create-face" component={CreateFace} />
+          {/* <Route path="/matches" component={Matches} /> */}
           {accountCreated &&
             signupCompleted && (
               <Switch>
@@ -76,7 +77,7 @@ const mapState = state => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     // isLoggedIn: !!state.user.id,
     accountCreated: !!state.user.id,
-    signupCompleted: !!state.user.firstName
+    signupCompleted: !!state.user.createdFaceDesc
   }
 }
 

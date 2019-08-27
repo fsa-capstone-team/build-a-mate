@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
@@ -8,6 +10,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import MenuItem from '@material-ui/core/MenuItem'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
+import {editInfo} from '../store'
+//import history from '../history'
 
 const months = {
   January: 1,
@@ -56,10 +60,51 @@ const styles = () => ({
 })
 
 class SignupForm extends Component {
-  render() {
+  constructor() {
+    super()
+    this.state = {
+      firstName: '',
+      lastName: '',
+      month: '',
+      day: '',
+      year: '',
+      gender: '',
+      genderPreference: '',
+      summary: '',
+      photos: ['']
+    }
+  }
+
+  handleChange = event => {
+    event.preventDefault()
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault()
+    const birthday = new Date(
+      this.state.year,
+      this.state.month - 1,
+      this.state.day
+    )
+    const age = Math.abs(
+      new Date(Date.now() - birthday.getTime()).getUTCFullYear() - 1970
+    )
+    if (age < 18) {
+      alert('You must be at least 18 years old to sign up.')
+      
+    } else {
+      await this.props.editInfo(this.state)
+      this.props.step()
+      //history.push('/signup')
+    }
+  }
+
+  async componentDidMount() {
+    //console.log('PROPS:', this.props)
     const {
-      classes,
-      handleChange,
       firstName,
       lastName,
       month,
@@ -69,11 +114,47 @@ class SignupForm extends Component {
       genderPreference,
       summary,
       photos
-    } = this.props
+    } = this.props.user
+    this.setState({
+      firstName,
+      lastName,
+      month,
+      day,
+      year,
+      gender,
+      genderPreference,
+      summary,
+      photos
+    })
+  }
+
+  render() {
+    //console.log('LOCAL STATE:', this.state)
+    const {classes} = this.props
+    const {
+      firstName,
+      lastName,
+      month,
+      day,
+      year,
+      gender,
+      genderPreference,
+      summary,
+      photos
+    } = this.state
+    const {handleChange, handleSubmit} = this
 
     return (
-      // <Box width="30%">
-      <form>
+      <form onSubmit={handleSubmit}>
+        <Button
+          justifyContent="flex-end"
+          variant="contained"
+          color="primary"
+          type="submit"
+          name="submit"
+        >
+          Next
+        </Button>
         <Box
           display="flex"
           justifyContent="center"
@@ -163,7 +244,7 @@ class SignupForm extends Component {
         </Box>
         <Box
           display="flex"
-          justifyContent="space-around"
+          justifyContent="center"
           alignItems="center"
           width="100%"
         >
@@ -233,8 +314,8 @@ class SignupForm extends Component {
             cols={3}
             spacing={1}
           >
-            {photos.map(photo => (
-              <GridListTile key={photo} cols={1} rows={1}>
+            {photos.map((photo, idx) => (
+              <GridListTile key={idx} cols={1} rows={1}>
                 <img
                   src={photo}
                   onClick={() => {
@@ -246,9 +327,18 @@ class SignupForm extends Component {
           </GridList>
         </Box>
       </form>
-      // </Box>
     )
   }
 }
 
-export default withStyles(styles)(SignupForm)
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  editInfo: userObject => dispatch(editInfo(userObject))
+})
+
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(SignupForm)
+)
