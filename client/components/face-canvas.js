@@ -14,21 +14,25 @@ class FaceCanvas extends React.PureComponent {
         eyebrow: {
           top: 0,
           left: 0,
+          feature: 'eyebrow',
           image: props.currentFeatures.eyebrow
         },
         eye: {
           top: 0,
           left: 0,
+          feature: 'eye',
           image: props.currentFeatures.eye
         },
         nose: {
           top: 0,
           left: 0,
+          feature: 'nose',
           image: props.currentFeatures.nose
         },
         mouth: {
           top: 0,
           left: 0,
+          feature: 'mouth',
           image: props.currentFeatures.mouth
         }
       }

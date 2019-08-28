@@ -94,7 +94,6 @@ class SignupForm extends Component {
     )
     if (age < 18) {
       alert('You must be at least 18 years old to sign up.')
-      
     } else {
       await this.props.editInfo(this.state)
       this.props.step()
@@ -146,15 +145,6 @@ class SignupForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Button
-          justifyContent="flex-end"
-          variant="contained"
-          color="primary"
-          type="submit"
-          name="submit"
-        >
-          Next
-        </Button>
         <Box
           display="flex"
           justifyContent="center"
@@ -325,6 +315,16 @@ class SignupForm extends Component {
               </GridListTile>
             ))}
           </GridList>
+        </Box>
+        <Box display="flex" justifyContent="flex-end">
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            name="submit"
+          >
+            Next
+          </Button>
         </Box>
       </form>
     )
