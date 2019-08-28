@@ -16,64 +16,17 @@ const initialState = {
 
 const maleFeatures = {
   heads: [
-    '/image/face.jpg',
-    '/image/face.jpg',
-    '/image/face.jpg',
-    '/image/face.jpg',
-    '/image/face.jpg',
-    '/image/face.jpg'
-  ],
-  eyebrows: [
-    '/image/eyebrows.jpeg',
-    '/image/eyebrows.jpeg',
-    '/image/eyebrows.jpeg',
-    '/image/eyebrows.jpeg',
-    '/image/eyebrows.jpeg',
-    '/image/eyebrows.jpeg',
-    '/image/eyebrows.jpeg'
-  ],
-  eyes: [
-    '/image/eyes.jpeg',
-    '/image/eyes.jpeg',
-    '/image/eyes.jpeg',
-    '/image/eyes.jpeg',
-    '/image/eyes.jpeg',
-    '/image/eyes.jpeg',
-    '/image/eyes.jpeg'
-  ],
-  noses: [
-    '/image/nose.png',
-    'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-    'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-    'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-    'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-    'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-    'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg'
-  ],
-  mouths: [
-    '/image/lips.jpg',
-    'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-    'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-    'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-    'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-    'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-    'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg'
-  ]
-}
-
-const femaleFeatures = {
-  heads: [
     '/image/female-head-1.png',
-    '/image/female-head-1.png',
-    '/image/female-head-1.png',
+    '/image/female-head-2.png',
+    '/image/female-head-3.png',
     '/image/female-head-1.png',
     '/image/female-head-1.png',
     '/image/female-head-1.png'
   ],
   eyebrows: [
     '/image/female-eyebrows-1.png',
-    '/image/female-eyebrows-1.png',
-    '/image/female-eyebrows-1.png',
+    '/image/female-eyebrows-2.png',
+    '/image/female-eyebrows-3.png',
     '/image/female-eyebrows-1.png',
     '/image/female-eyebrows-1.png',
     '/image/female-eyebrows-1.png',
@@ -81,8 +34,8 @@ const femaleFeatures = {
   ],
   eyes: [
     '/image/female-eyes-1.png',
-    '/image/female-eyes-1.png',
-    '/image/female-eyes-1.png',
+    '/image/female-eyes-2.png',
+    '/image/female-eyes-3.png',
     '/image/female-eyes-1.png',
     '/image/female-eyes-1.png',
     '/image/female-eyes-1.png',
@@ -90,8 +43,8 @@ const femaleFeatures = {
   ],
   noses: [
     '/image/female-nose-1.png',
-    '/image/female-nose-1.png',
-    '/image/female-nose-1.png',
+    '/image/female-nose-2.png',
+    '/image/female-nose-3.png',
     '/image/female-nose-1.png',
     '/image/female-nose-1.png',
     '/image/female-nose-1.png',
@@ -99,8 +52,55 @@ const femaleFeatures = {
   ],
   mouths: [
     '/image/female-mouth-1.png',
+    '/image/female-mouth-2.png',
+    '/image/female-mouth-3.png',
     '/image/female-mouth-1.png',
     '/image/female-mouth-1.png',
+    '/image/female-mouth-1.png',
+    '/image/female-mouth-1.png'
+  ]
+}
+
+const femaleFeatures = {
+  heads: [
+    '/image/female-head-1.png',
+    '/image/female-head-2.png',
+    '/image/female-head-3.png',
+    '/image/female-head-1.png',
+    '/image/female-head-1.png',
+    '/image/female-head-1.png'
+  ],
+  eyebrows: [
+    '/image/female-eyebrows-1.png',
+    '/image/female-eyebrows-2.png',
+    '/image/female-eyebrows-3.png',
+    '/image/female-eyebrows-1.png',
+    '/image/female-eyebrows-1.png',
+    '/image/female-eyebrows-1.png',
+    '/image/female-eyebrows-1.png'
+  ],
+  eyes: [
+    '/image/female-eyes-1.png',
+    '/image/female-eyes-2.png',
+    '/image/female-eyes-3.png',
+    '/image/female-eyes-1.png',
+    '/image/female-eyes-1.png',
+    '/image/female-eyes-1.png',
+    '/image/female-eyes-1.png'
+  ],
+  noses: [
+    '/image/female-nose-1.png',
+    '/image/female-nose-2.png',
+    '/image/female-nose-3.png',
+    '/image/female-nose-1.png',
+    '/image/female-nose-1.png',
+    '/image/female-nose-1.png',
+    '/image/female-nose-1.png'
+  ],
+  mouths: [
+    '/image/female-mouth-1.png',
+    '/image/female-mouth-2.png',
+    '/image/female-mouth-3.png',
     '/image/female-mouth-1.png',
     '/image/female-mouth-1.png',
     '/image/female-mouth-1.png',
