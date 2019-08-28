@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Selfie from './selfie'
 import Webcam from 'react-webcam'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import {addFaceDesc} from '../store'
+import resizebase64 from 'resize-base64'
+import grayscale from 'image-filter-grayscale'
+import imageFilterCore from 'image-filter-core'
 //import history from '../history'
 require('../../secrets')
 
@@ -29,8 +31,28 @@ class UploadBWFace extends Component {
   }
 
   handleSubmit = async () => {
-    console.log('CHECK HERE:', this.state.bwFaceImg)
-    await this.props.addFaceDesc(this.state.bwFaceImg, 'bwFaceDesc')
+    console.log('CHECK HERE:', this.state.bwFaceImg.src)
+    // var bwImg = new Image()
+    var resizeImg = new Image()
+    //resize
+    var resizeImgSrc = resizebase64(this.state.bwFaceImg.src, 150, 150)
+    resizeImg.src = resizeImgSrc
+    console.log('RESIZED:', resizeImg.src)
+    //grayscale
+    // // bwImg.src = resizeImg
+    // let bwFace = document.getElementById('#bwFace')
+
+    // let newCanvas = document.createElement('canvas')
+    // let canvasCtx = newCanvas.getContext('2d')
+
+    // canvasCtx.drawImage(resizeImg, 150, 150)
+    // const imgData = canvasCtx.getImageData(0, 0, 150, 150)
+    // grayscale(imgData, 4).then(function(result) {
+    //   const src = imageFilterCore.convertImageDataToCanvasURL(result)
+    //   console.log('BWIMG:', src)
+    //   bwImg.src = src
+    // })
+    await this.props.addFaceDesc(resizeImg, 'bwFaceDesc')
     this.props.step()
   }
 
@@ -40,8 +62,8 @@ class UploadBWFace extends Component {
 
   render() {
     const videoConstraints = {
-      width: 150,
-      height: 150,
+      width: 450,
+      height: 450,
       facingMode: 'user'
     }
 
@@ -73,10 +95,10 @@ class UploadBWFace extends Component {
         >
           <Webcam
             audio={false}
-            height={150}
+            height={450}
             ref={this.setRef}
             screenshotFormat="image/png"
-            width={150}
+            width={450}
             videoConstraints={videoConstraints}
           />
           <Button
@@ -90,7 +112,7 @@ class UploadBWFace extends Component {
             <PhotoCamera />
           </Button>
           <div>
-            {this.state.bwFaceImg && <Selfie img={this.state.bwFaceImg.src} />}
+            {this.state.bwFaceImg && <img src={this.state.bwFaceImg.src} />}
           </div>
         </Box>
       </Box>
