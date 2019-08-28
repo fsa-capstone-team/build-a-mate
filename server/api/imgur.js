@@ -6,6 +6,43 @@ const User = require('../db/models/user')
 const faceapi = require('face-api.js')
 module.exports = router
 
+//ONLY FOR DEMO
+router.post('/demoUpload/:id', async (req, res, next) => {
+  try {
+    imgur.setClientId(process.env.IMGUR_CLIENT_ID)
+    imgur.setCredentials(
+      process.env.IMGUR_EMAIL,
+      process.env.IMGUR_PASSWORD,
+      process.env.IMGUR_CLIENT_ID
+    )
+
+    const image = req.body.file
+    const id = 'qizwMyP'
+    let link = ''
+
+    // UPLOAD TO IMGUR -> GET PHOTO ID
+    await imgur
+      .uploadBase64(image, id)
+      .then(function(json) {
+        link = json.data.link
+      })
+      .catch(function(err) {
+        console.error(err.message)
+      })
+    console.log('LINK:', link)
+
+    // SAVE FACE USER ALBUM
+    console.log('HERE!')
+    const user = await User.findByPk(req.params.id)
+    console.log(user)
+    await user.update({photos: [link, ...user.photos]})
+    console.log('USER:', user)
+    res.sendStatus(200)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/bwFaceDesc/:id', async (req, res, next) => {
   try {
     // imgur.setClientId(process.env.IMGUR_CLIENT_ID)

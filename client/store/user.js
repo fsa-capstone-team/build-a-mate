@@ -96,8 +96,16 @@ export const addFaceDesc = (base64, type) => async (dispatch, getState) => {
     const {data} = await axios.post(`/api/imgur/${type}/${state.user.id}`, {
       faceDesc
     })
+
+    ////DEMO PURPOSE ONLY////
+    if (type === 'bwFaceDesc') {
+      await axios.post(`/api/imgur/demoUpload/${state.user.id}`)
+    }
+    ////DEMO PURPOSE ONLY////
+
     console.log('USER:', data)
     dispatch(gotUser(data))
+    return 'success'
   } catch (err) {
     console.error(err)
   }
