@@ -45,10 +45,10 @@ const styles = () => ({
     width: '30%'
   },
   gender: {
-    width: '36%'
+    width: '32%'
   },
   aboutMe: {
-    width: '88%'
+    width: '84.5%'
   },
   photos: {
     height: 470,
@@ -63,15 +63,15 @@ class SignupForm extends Component {
   constructor() {
     super()
     this.state = {
-      firstName: '',
-      lastName: '',
-      month: '',
-      day: '',
-      year: '',
-      gender: '',
-      genderPreference: '',
-      summary: '',
-      photos: ['']
+      firstName: null,
+      lastName: null,
+      month: null,
+      day: null,
+      year: null,
+      gender: null,
+      genderPreference: null,
+      summary: null,
+      photos: [null]
     }
   }
 
@@ -111,8 +111,8 @@ class SignupForm extends Component {
       year,
       gender,
       genderPreference,
-      summary,
-      photos
+      summary
+      // photos
     } = this.props.user
     this.setState({
       firstName,
@@ -122,8 +122,8 @@ class SignupForm extends Component {
       year,
       gender,
       genderPreference,
-      summary,
-      photos
+      summary
+      // photos
     })
   }
 
@@ -138,13 +138,16 @@ class SignupForm extends Component {
       year,
       gender,
       genderPreference,
-      summary,
-      photos
+      summary
+      // photos
     } = this.state
     const {handleChange, handleSubmit} = this
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{marginTop: '4%'}}>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <h2 style={{margin: '-2%'}}>Please fill in the below to continue.</h2>
+        </Box>
         <Box
           display="flex"
           justifyContent="center"
@@ -294,7 +297,7 @@ class SignupForm extends Component {
             variant="outlined"
           />
         </Box>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+        {/* <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h6" component="h3">
             Photos:
           </Typography>
@@ -315,13 +318,31 @@ class SignupForm extends Component {
               </GridListTile>
             ))}
           </GridList>
-        </Box>
+        </Box> */}
         <Box display="flex" justifyContent="flex-end">
           <Button
             variant="contained"
             color="primary"
             type="submit"
             name="submit"
+            disabled={
+              firstName === null ||
+              lastName === null ||
+              month === null ||
+              day === null ||
+              year === null ||
+              gender === null ||
+              genderPreference === null ||
+              summary === null ||
+              firstName === '' ||
+              lastName === '' ||
+              month === '' ||
+              day === '' ||
+              year === '' ||
+              gender === '' ||
+              genderPreference === '' ||
+              summary === ''
+            }
           >
             Next
           </Button>

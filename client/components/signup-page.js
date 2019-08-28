@@ -23,7 +23,8 @@ const styles = () => ({
   },
   stepper: {
     width: '70%',
-    marginTop: 10,
+    marginTop: '2%',
+    marginBottom: '-3%',
     backgroundColor: '#E4E9FE'
   }
 })
