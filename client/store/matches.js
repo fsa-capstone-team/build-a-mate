@@ -12,12 +12,14 @@ export const getMatches = () => async (dispatch, getState) => {
   try {
     const state = getState()
     //onst id = state.user.id
+    console.log('USER DESC:', state.user.createdFaceDesc)
     const {data} = await axios.get(`/api/users/matches/${state.user.id}`)
     const parsedCreatedFaceDesc = await new Float32Array(
       Object.values(JSON.parse(state.user.createdFaceDesc))
     )
     let matches = await Promise.all(
       data.map(async match => {
+        console.log('match:', match)
         const parsedBwFaceDesc = await new Float32Array(
           Object.values(JSON.parse(match.bwFaceDesc))
         )
