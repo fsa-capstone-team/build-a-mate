@@ -17,7 +17,7 @@ const initialState = {
 const maleFeatures = {
   heads: [
     '/image/male-head-1.png',
-    '/image/female-head-2.png',
+    '/image/male-head-2.png',
     '/image/female-head-3.png',
     '/image/female-head-1.png',
     '/image/female-head-1.png',
@@ -25,7 +25,7 @@ const maleFeatures = {
   ],
   eyebrows: [
     '/image/male-eyebrows-1.png',
-    '/image/female-eyebrows-2.png',
+    '/image/male-eyebrows-2.png',
     '/image/female-eyebrows-3.png',
     '/image/female-eyebrows-1.png',
     '/image/female-eyebrows-1.png',
@@ -34,7 +34,7 @@ const maleFeatures = {
   ],
   eyes: [
     '/image/male-eyes-1.png',
-    '/image/female-eyes-2.png',
+    '/image/male-eyes-2.png',
     '/image/female-eyes-3.png',
     '/image/female-eyes-1.png',
     '/image/female-eyes-1.png',
@@ -43,7 +43,7 @@ const maleFeatures = {
   ],
   noses: [
     '/image/male-nose-1.png',
-    '/image/female-nose-2.png',
+    '/image/male-nose-2.png',
     '/image/female-nose-3.png',
     '/image/female-nose-1.png',
     '/image/female-nose-1.png',
@@ -52,7 +52,7 @@ const maleFeatures = {
   ],
   mouths: [
     '/image/male-mouth-1.png',
-    '/image/female-mouth-2.png',
+    '/image/male-mouth-2.png',
     '/image/female-mouth-3.png',
     '/image/female-mouth-1.png',
     '/image/female-mouth-1.png',
