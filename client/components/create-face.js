@@ -44,7 +44,7 @@ class CreateFace extends Component {
       croppedCanvas.width = 150
       croppedCanvas.height = 150
 
-      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 25, 25, 130, 130)
+      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 0, 0, 130, 130)
       const imgData = croppedCanvasContext.getImageData(0, 0, 130, 130)
 
       grayscale(imgData, 4).then(async result => {
@@ -105,8 +105,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addFaceDesc: (createdFaceImg, type) =>
-    dispatch(addFaceDesc(createdFaceImg, type))
+  addFaceDesc: (base64, type) => dispatch(addFaceDesc(base64, type))
 })
 
 // export default withRouter(withStyles(styles)(
