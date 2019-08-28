@@ -27,29 +27,29 @@ class CreateFace extends Component {
     this.state = {
       heads: [
         '/image/face.jpg',
-        'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
-        'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
-        'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
-        'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg',
-        'https://i.pinimg.com/originals/a9/0b/97/a90b97c98fd6d7c0e4e04d208e0090bd.jpg'
+        '/image/face.jpg',
+        '/image/face.jpg',
+        '/image/face.jpg',
+        '/image/face.jpg',
+        '/image/face.jpg'
       ],
       eyebrows: [
-        '/image/Eyebrows.png',
-        'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
-        'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
-        'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
-        'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
-        'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png',
-        'http://www.mahilalu.com/wp-content/uploads/2016/01/Eye-Brows-tips.png'
+        '/image/eyebrows.jpeg',
+        '/image/eyebrows.jpeg',
+        '/image/eyebrows.jpeg',
+        '/image/eyebrows.jpeg',
+        '/image/eyebrows.jpeg',
+        '/image/eyebrows.jpeg',
+        '/image/eyebrows.jpeg'
       ],
       eyes: [
-        '/image/eyes.jpg',
-        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
-        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
-        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
-        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
-        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg',
-        'https://visioneyeinstitute.com.au/wp-content/uploads/laser-eye-safety.jpg'
+        '/image/eyes.jpeg',
+        '/image/eyes.jpeg',
+        '/image/eyes.jpeg',
+        '/image/eyes.jpeg',
+        '/image/eyes.jpeg',
+        '/image/eyes.jpeg',
+        '/image/eyes.jpeg'
       ],
       noses: [
         '/image/nose.png',

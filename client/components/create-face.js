@@ -1,29 +1,16 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withStyles} from '@material-ui/styles'
 import FaceFeatures from './face-features'
 import FaceCanvas from './face-canvas'
 import CustomDragLayer from './custom-drag-layer'
-import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 import {Button} from '@material-ui/core'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import html2canvas from 'html2canvas'
-import {addFaceDesc} from '../store'
+import {addFaceDesc, resetFeatures, resetTemplate} from '../store'
 import grayscale from 'image-filter-grayscale'
 import imageFilterCore from 'image-filter-core'
 import history from '../history'
-import {withRouter} from 'react-router-dom'
-
-const styles = () => ({
-  features: {
-    margin: '2%'
-  },
-  canvas: {
-    marginTop: '2%',
-    marginRight: '2%',
-    marginBottom: '2%'
-  }
-})
 
 class CreateFace extends Component {
   // constructor() {
@@ -58,43 +45,43 @@ class CreateFace extends Component {
         if (done === 'success') {
           // this.setState({createdFaceImg})
           history.push('/matches')
+          this.props.resetFeatures()
+          this.props.resetTemplate()
         }
       })
     })
   }
 
   render() {
-    const {classes, template, currentFeatures} = this.props
+    const {template, currentFeatures} = this.props
 
     return (
-      <Grid container>
-        <Grid item xs={5} className={classes.features}>
-          <FaceFeatures />
-        </Grid>
-        <Grid item xs={6} className={classes.canvas}>
-          <div id="faceCanvas">
-            <div>
-              <FaceCanvas
-                template={template}
-                currentFeatures={currentFeatures}
-              />
-              <CustomDragLayer />
-            </div>
-            <div>
-              <Button
-                variant="contained"
-                size="small"
-                color="primary"
-                type="submit"
-                onClick={this.handleScreenShot}
-              >
-                Submit Face
-                <PhotoCamera />
-              </Button>
-            </div>
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-around"
+        style={{marginTop: '5%'}}
+      >
+        <FaceFeatures />
+        <div id="faceCanvas">
+          <div>
+            <FaceCanvas template={template} currentFeatures={currentFeatures} />
+            <CustomDragLayer />
           </div>
-        </Grid>
-      </Grid>
+          <Box display="flex" justifyContent="flex-end">
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              type="submit"
+              onClick={this.handleScreenShot}
+            >
+              Submit Face
+              <PhotoCamera />
+            </Button>
+          </Box>
+        </div>
+      </Box>
     )
   }
 }
@@ -105,12 +92,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addFaceDesc: (base64, type) => dispatch(addFaceDesc(base64, type))
+  addFaceDesc: (base64, type) => dispatch(addFaceDesc(base64, type)),
+  resetFeatures: () => dispatch(resetFeatures()),
+  resetTemplate: () => dispatch(resetTemplate())
 })
 
-// export default withRouter(withStyles(styles)(
-//   connect(mapStateToProps, mapDispatchToProps)(CreateFace)))
-
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(CreateFace)
-)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateFace)
