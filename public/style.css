@@ -27,9 +27,9 @@ form div {
 }
 
 #carouselbody {
-  width: 50%; /* for example */
+  width: 60%; /* for example */
   margin: auto;
-  padding: 20px;
+  padding: 50px;
 }
 
 h3 {
@@ -39,4 +39,16 @@ h3 {
 .imgBody {
   display: flex;
   justify-content: space-between;
+}
+
+#container {
+  background-image: url('/image/homePage1.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  margin-right: -5%;
+  margin-top: 10%;
+}
+#illustration {
+  margin-top: -10%;
+  margin-right: -10%;
 }
