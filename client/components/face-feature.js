@@ -30,10 +30,15 @@ class FaceFeature extends React.PureComponent {
     }
   }
   render() {
-    const {image, connectDragSource} = this.props
+    const {feature, image, connectDragSource} = this.props
+    console.log(feature)
     return connectDragSource(
       <div style={getStyles(this.props)}>
-        <img src={image} width={200} />
+        {feature === 'eyebrow' || feature === 'eye' ? (
+          <img src={image} width={400} />
+        ) : (
+          <img src={image} width={200} />
+        )}
       </div>
     )
   }

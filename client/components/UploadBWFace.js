@@ -46,24 +46,8 @@ class UploadBWFace extends Component {
     }
 
     return (
-      <Box display="flex" flexDirection="column" alignItems="center">
+      <div>
         <h1>Upload Face</h1>
-        <Button
-          variant="contained"
-          color="primary"
-          name="previous"
-          onClick={this.handleStepBack}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="primary"
-          onClick={this.handleSubmit}
-        >
-          Submit photo
-        </Button>
         <Box
           display="flex"
           justifyContent="center"
@@ -90,10 +74,28 @@ class UploadBWFace extends Component {
             <PhotoCamera />
           </Button>
           <div>
-            {this.state.bwFaceImg && <Selfie img={this.state.bwFaceImg.src} />}
+            {this.state.bwFaceImg && <img src={this.state.bwFaceImg.src} />}
           </div>
         </Box>
-      </Box>
+        <Box display="flex" justifyContent="space-between">
+          <Button
+            variant="contained"
+            color="primary"
+            name="previous"
+            onClick={this.handleStepBack}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            onClick={this.handleSubmit}
+          >
+            Submit photo
+          </Button>
+        </Box>
+      </div>
     )
   }
 }
