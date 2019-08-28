@@ -93,13 +93,17 @@ export const addFaceDesc = (base64, type) => async (dispatch, getState) => {
     const faceDesc = await faceapi.computeFaceDescriptor(base64)
     console.log(faceDesc)
     console.log('TYPE:', type)
+    console.log('BASE64', base64.src)
+
     const {data} = await axios.post(`/api/imgur/${type}/${state.user.id}`, {
       faceDesc
     })
 
     ////DEMO PURPOSE ONLY////
     if (type === 'bwFaceDesc') {
-      await axios.post(`/api/imgur/demoUpload/${state.user.id}`)
+      await axios.post(`/api/imgur/demoUpload/${state.user.id}`, {
+        src: base64.src
+      })
     }
     ////DEMO PURPOSE ONLY////
 
