@@ -98,6 +98,7 @@ export const addFaceDesc = (base64, type) => async (dispatch, getState) => {
     })
     console.log('USER:', data)
     dispatch(gotUser(data))
+    return 'success'
   } catch (err) {
     console.error(err)
   }
