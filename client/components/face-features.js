@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {changeCurrentTemplate, addToCurrentFeatures} from '../store'
+import {
+  getFeatures,
+  changeCurrentTemplate,
+  addToCurrentFeatures
+} from '../store'
 import {withStyles} from '@material-ui/styles'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
@@ -25,51 +29,23 @@ class CreateFace extends Component {
   constructor() {
     super()
     this.state = {
-      heads: [
-        '/image/face.jpg',
-        '/image/face.jpg',
-        '/image/face.jpg',
-        '/image/face.jpg',
-        '/image/face.jpg',
-        '/image/face.jpg'
-      ],
-      eyebrows: [
-        '/image/eyebrows.jpeg',
-        '/image/eyebrows.jpeg',
-        '/image/eyebrows.jpeg',
-        '/image/eyebrows.jpeg',
-        '/image/eyebrows.jpeg',
-        '/image/eyebrows.jpeg',
-        '/image/eyebrows.jpeg'
-      ],
-      eyes: [
-        '/image/eyes.jpeg',
-        '/image/eyes.jpeg',
-        '/image/eyes.jpeg',
-        '/image/eyes.jpeg',
-        '/image/eyes.jpeg',
-        '/image/eyes.jpeg',
-        '/image/eyes.jpeg'
-      ],
-      noses: [
-        '/image/nose.png',
-        'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-        'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-        'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-        'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-        'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg',
-        'http://cdn.24.co.za/files/Cms/General/d/3842/a027f9013a9c4a2a84a20a0edb02d6af.jpg'
-      ],
-      mouths: [
-        '/image/lips.jpg',
-        'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-        'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-        'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-        'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-        'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg',
-        'https://groomandstyle.com/wp-content/uploads/2018/07/Beautiful-Lips.jpg'
-      ]
+      heads: [],
+      eyebrows: [],
+      eyes: [],
+      noses: [],
+      mouths: []
     }
+  }
+
+  async componentDidMount() {
+    await this.props.getFeatures(this.props.genderPreference)
+    this.setState({
+      heads: this.props.faceFeatures.heads,
+      eyebrows: this.props.faceFeatures.eyebrows,
+      eyes: this.props.faceFeatures.eyes,
+      noses: this.props.faceFeatures.noses,
+      mouths: this.props.faceFeatures.mouths
+    })
   }
 
   render() {
@@ -153,8 +129,18 @@ class CreateFace extends Component {
   }
 }
 
+const mapStateToProps = function(state) {
+  return {
+    genderPreference: state.user.genderPreference,
+    faceFeatures: state.faceFeatures
+  }
+}
+
 const mapDispatchToProps = function(dispatch) {
   return {
+    getFeatures(genderPreference) {
+      dispatch(getFeatures(genderPreference))
+    },
     changeTemplate(event) {
       dispatch(changeCurrentTemplate(event.currentTarget.value))
     },
@@ -169,4 +155,6 @@ const mapDispatchToProps = function(dispatch) {
   }
 }
 
-export default withStyles(styles)(connect(null, mapDispatchToProps)(CreateFace))
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(CreateFace)
+)

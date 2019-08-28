@@ -35,9 +35,9 @@ class FaceFeature extends React.PureComponent {
     return connectDragSource(
       <div style={getStyles(this.props)}>
         {feature === 'eyebrow' || feature === 'eye' ? (
-          <img src={image} width={400} />
+          <img src={image} />
         ) : (
-          <img src={image} width={200} />
+          <img src={image} />
         )}
       </div>
     )
