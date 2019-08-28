@@ -20,3 +20,35 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.carousel-Img {
+  width: 32%; /* use this, or not */
+  margin: auto;
+}
+
+#carouselbody {
+  width: 60%; /* for example */
+  margin: auto;
+  padding: 50px;
+}
+
+h3 {
+  color: grey;
+}
+
+.imgBody {
+  display: flex;
+  justify-content: space-between;
+}
+
+#container {
+  background-image: url('/image/homePage1.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  margin-right: -5%;
+  margin-top: 10%;
+}
+#illustration {
+  margin-top: -10%;
+  margin-right: -10%;
+}
