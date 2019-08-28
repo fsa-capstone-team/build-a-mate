@@ -26,12 +26,12 @@ const styles = () => ({
 })
 
 class CreateFace extends Component {
-  constructor() {
-    super()
-    this.state = {
-      createdFaceImg: ''
-    }
-  }
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     createdFaceImg: ''
+  //   }
+  // }
 
   handleScreenShot = async () => {
     const body = document.querySelector('#faceCanvas')
@@ -47,18 +47,20 @@ class CreateFace extends Component {
       croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 25, 25, 130, 130)
       const imgData = croppedCanvasContext.getImageData(0, 0, 130, 130)
 
-      grayscale(imgData, 4).then(function(result) {
+      grayscale(imgData, 4).then(async result => {
         const src = imageFilterCore.convertImageDataToCanvasURL(result)
         console.log('CANVASURL:', src)
         createdFaceImg.src = src
+        const done = await this.props.addFaceDesc(
+          createdFaceImg,
+          'createdFaceDesc'
+        )
+        if (done === 'success') {
+          // this.setState({createdFaceImg})
+          history.push('/matches')
+        }
       })
-
-      this.setState({createdFaceImg})
     })
-    console.log('HISTORY:', history)
-    await this.props.addFaceDesc(createdFaceImg, 'createdFaceDesc')
-    console.log('HISTORY2:', this.props.history)
-    history.push('/matches')
   }
 
   render() {

@@ -32,6 +32,7 @@ router.get('/matches/:id', async (req, res, next) => {
         'bwFaceDesc'
       ]
     })
+    console.log('MATCHES:', matches)
     res.send(matches)
   } catch (err) {
     next(err)
