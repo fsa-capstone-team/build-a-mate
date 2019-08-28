@@ -76,12 +76,12 @@ class Profile extends Component {
     } = this.props
     const {activeStep} = this.state
     const maxSteps = photos.length
-
-    const birthday = new Date(year, month - 1, day)
+    console.log(month)
+    const birthday = new Date(year, Number(month) - 1, day)
     const age = Math.abs(
       new Date(Date.now() - birthday.getTime()).getUTCFullYear() - 1970
     )
-
+    console.log(this.props.month)
     return (
       <div className={classes.root}>
         <AutoPlaySwipeableViews
