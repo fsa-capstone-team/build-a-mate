@@ -26,13 +26,6 @@ const styles = () => ({
 })
 
 class CreateFace extends Component {
-  constructor() {
-    super()
-    this.state = {
-      createdFaceImg: ''
-    }
-  }
-
   handleScreenShot = async () => {
     const body = document.querySelector('#faceCanvas')
     console.log('BODY:', body)
@@ -44,20 +37,20 @@ class CreateFace extends Component {
       croppedCanvas.width = 150
       croppedCanvas.height = 150
 
-      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 25, 25, 130, 130)
+      croppedCanvasContext.drawImage(canvas, 0, 0, 802, 802, 0, 0, 130, 130)
       const imgData = croppedCanvasContext.getImageData(0, 0, 130, 130)
 
       grayscale(imgData, 4).then(function(result) {
         const src = imageFilterCore.convertImageDataToCanvasURL(result)
         console.log('CANVASURL:', src)
         createdFaceImg.src = src
+        console.log('createdFaceImg:', createdFaceImg.src)
       })
-
-      this.setState({createdFaceImg})
     })
-    console.log('HISTORY:', history)
+    console.log('afterThen', createdFaceImg)
+
     await this.props.addFaceDesc(createdFaceImg, 'createdFaceDesc')
-    console.log('HISTORY2:', this.props.history)
+    // console.log('HISTORY2:', this.props.history)
     history.push('/matches')
   }
 
@@ -103,8 +96,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addFaceDesc: (createdFaceImg, type) =>
-    dispatch(addFaceDesc(createdFaceImg, type))
+  addFaceDesc: (base64, type) => dispatch(addFaceDesc(base64, type))
 })
 
 // export default withRouter(withStyles(styles)(
