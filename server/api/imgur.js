@@ -16,7 +16,7 @@ router.post('/demoUpload/:id', async (req, res, next) => {
       process.env.IMGUR_CLIENT_ID
     )
 
-    const image = req.body.file
+    const image = req.body.src.split(',')[1]
     const id = 'qizwMyP'
     let link = ''
 
@@ -25,17 +25,20 @@ router.post('/demoUpload/:id', async (req, res, next) => {
       .uploadBase64(image, id)
       .then(function(json) {
         link = json.data.link
+        console.log('LINK1:', link)
       })
       .catch(function(err) {
         console.error(err.message)
       })
-    console.log('LINK:', link)
+    console.log('LINK2:', link)
 
     // SAVE FACE USER ALBUM
     console.log('HERE!')
     const user = await User.findByPk(req.params.id)
+    const array = user.photos
+    array.unshift(link)
     console.log(user)
-    await user.update({photos: [link, ...user.photos]})
+    await user.update({photos: array})
     console.log('USER:', user)
     res.sendStatus(200)
   } catch (err) {
