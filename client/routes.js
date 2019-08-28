@@ -4,7 +4,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Profile,
-  Homepage,
+  Home,
   SignupPage,
   FaceapiTest,
   UploadBWFace,
@@ -39,7 +39,7 @@ class Routes extends Component {
       <Box className={classes.content}>
         <Switch>
           {/* Routes placed here are available to all visitors */}
-          <Route exact path="/" component={Homepage} />
+          <Route exact path="/" component={Home} />
           <Route path="/face-api" component={FaceapiTest} />
           <Route path="/upload-bw-face" component={UploadBWFace} />
           <Route path="/create-face" component={CreateFace} />
