@@ -76,8 +76,8 @@ class CreateFace extends Component {
               type="submit"
               onClick={this.handleScreenShot}
             >
-              Submit Face
-              <PhotoCamera />
+              Continue to matches!
+              {/* <PhotoCamera /> */}
             </Button>
           </Box>
         </div>

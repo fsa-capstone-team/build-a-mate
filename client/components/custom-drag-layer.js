@@ -38,7 +38,7 @@ const CustomDragLayer = props => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return <img src={item.image} width={200} />
+        return <img src={item.image} />
       default:
         return null
     }

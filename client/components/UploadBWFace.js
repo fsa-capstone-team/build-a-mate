@@ -15,7 +15,7 @@ class UploadBWFace extends Component {
   constructor() {
     super()
     this.state = {
-      bwFaceImg: ''
+      bwFaceImg: {src: '/image/selfie-placeholder.png'}
     }
   }
 
@@ -62,60 +62,83 @@ class UploadBWFace extends Component {
 
   render() {
     const videoConstraints = {
-      width: 450,
-      height: 450,
+      width: 350,
+      height: 350,
       facingMode: 'user'
     }
 
     return (
-      <div>
-        <h1>Upload Face</h1>
+      <div style={{marginTop: '5%'}}>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <h2 style={{margin: '-2%'}}>
+            Please center your face in the webcam.
+          </h2>
+          <h4>
+            This picture will only be used for our matching algorithm and will
+            not be visible to others.
+          </h4>
+        </Box>
         <Box
           display="flex"
           justifyContent="center"
           alignItems="center"
           width="100%"
-          color="text.primary"
         >
-          <Webcam
-            audio={false}
-            height={450}
-            ref={this.setRef}
-            screenshotFormat="image/png"
-            width={450}
-            videoConstraints={videoConstraints}
-          />
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            type="submit"
-            onClick={this.capture}
-          >
-            Capture photo
-            <PhotoCamera />
-          </Button>
-          <div>
-            {this.state.bwFaceImg && <img src={this.state.bwFaceImg.src} />}
-          </div>
-        </Box>
-        <Box display="flex" justifyContent="space-between">
-          <Button
-            variant="contained"
-            color="primary"
-            name="previous"
-            onClick={this.handleStepBack}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            onClick={this.handleSubmit}
-          >
-            Submit photo
-          </Button>
+          <Box display="flex" flexDirection="column" marginRight="3%">
+            <Box display="flex" margin="2%">
+              <Webcam
+                audio={false}
+                height={videoConstraints.height}
+                ref={this.setRef}
+                screenshotFormat="image/png"
+                width={videoConstraints.width}
+                videoConstraints={videoConstraints}
+              />
+            </Box>
+            <Box display="flex" justifyContent="space-between" margin="2%">
+              <Button
+                variant="contained"
+                color="primary"
+                name="previous"
+                style={{height: 40}}
+                onClick={this.handleStepBack}
+              >
+                Previous
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                type="submit"
+                style={{height: 40}}
+                onClick={this.capture}
+              >
+                Capture photo
+                <PhotoCamera />
+              </Button>
+            </Box>
+          </Box>
+          <Box display="flex" flexDirection="column" marginLeft="3%">
+            <Box display="flex" margin="2%">
+              {this.state.bwFaceImg && (
+                <img src={this.state.bwFaceImg.src} width={350} height={350} />
+              )}
+            </Box>
+            <Box display="flex" justifyContent="flex-end" margin="2%">
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                style={{height: 40}}
+                onClick={this.handleSubmit}
+                disabled={
+                  this.state.bwFaceImg.src === '/image/selfie-placeholder.png'
+                }
+              >
+                Next
+              </Button>
+            </Box>
+          </Box>
         </Box>
       </div>
     )
