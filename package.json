@@ -91,7 +91,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "resize-base64": "^1.0.12",
-    "sequelize": "^5.3.1",
+    "sequelize": "^5.15.1",
     "socket.io": "^2.2.0",
     "xmlhttprequest": "^1.8.0"
   },
